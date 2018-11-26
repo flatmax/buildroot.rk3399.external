@@ -1,0 +1,1 @@
+source "$BR2_EXTERNAL_NEO4_PATH/package/Config.in"

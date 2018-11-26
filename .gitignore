@@ -1,0 +1,7 @@
+*~
+.ssh
+board/raspberrypi3-64
+neo4_defconfig
+configs/rockchip
+overlays/lib/firmware/rockchip
+overlays/usr/share/alsa
