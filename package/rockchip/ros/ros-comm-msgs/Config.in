@@ -3,7 +3,7 @@ menuconfig BR2_PACKAGE_ROS_COMM_MSGS_SET
     depends on BR2_PACKAGE_HOST_CATKIN
 
 if BR2_PACKAGE_ROS_COMM_MSGS_SET
-source "package/rockchip/ros/ros-comm-msgs/rosgraph_msgs/Config.in"
-source "package/rockchip/ros/ros-comm-msgs/std-srvs/Config.in"
+source "$BR2_EXTERNAL_NEO4_PATH/package/rockchip/ros/ros-comm-msgs/rosgraph_msgs/Config.in"
+source "$BR2_EXTERNAL_NEO4_PATH/package/rockchip/ros/ros-comm-msgs/std-srvs/Config.in"
 
 endif

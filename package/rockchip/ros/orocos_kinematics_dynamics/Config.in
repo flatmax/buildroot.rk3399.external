@@ -1,1 +1,1 @@
-source "package/rockchip/ros/orocos_kinematics_dynamics/orocos-kdl/Config.in"
+source "$BR2_EXTERNAL_NEO4_PATH/package/rockchip/ros/orocos_kinematics_dynamics/orocos-kdl/Config.in"

@@ -3,6 +3,6 @@ menuconfig BR2_PACKAGE_LIBUVC_ROS_SET
 	depends on BR2_PACKAGE_HOST_CATKIN
 
 if BR2_PACKAGE_LIBUVC_ROS_SET
-source "package/rockchip/ros/libuvc-ros/libuvc-camera/Config.in"
-source "package/rockchip/ros/libuvc-ros/libuvc-ros/Config.in"
+source "$BR2_EXTERNAL_NEO4_PATH/package/rockchip/ros/libuvc-ros/libuvc-camera/Config.in"
+source "$BR2_EXTERNAL_NEO4_PATH/package/rockchip/ros/libuvc-ros/libuvc-ros/Config.in"
 endif

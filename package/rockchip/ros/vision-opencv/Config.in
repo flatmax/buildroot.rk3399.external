@@ -5,11 +5,11 @@ menuconfig BR2_PACKAGE_VISION_OPENCV_SET
 if BR2_PACKAGE_VISION_OPENCV_SET
 
 if BR2_PACKAGE_ROS_INDIGO
-source "package/rockchip/ros/vision-opencv/cv-bridge/Config_indigo.in"
+source "$BR2_EXTERNAL_NEO4_PATH/package/rockchip/ros/vision-opencv/cv-bridge/Config_indigo.in"
 endif
 
 if BR2_PACKAGE_ROS_KINETIC
-source "package/rockchip/ros/vision-opencv/cv-bridge/Config_kinetic.in"
+source "$BR2_EXTERNAL_NEO4_PATH/package/rockchip/ros/vision-opencv/cv-bridge/Config_kinetic.in"
 endif
 
 endif
