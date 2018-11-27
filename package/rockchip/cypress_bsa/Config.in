@@ -1,0 +1,15 @@
+config BR2_PACKAGE_CYPRESS_BSA
+    bool "broadcom(cypress) bsa server and app"
+    help
+	broadcom bsa server and app
+if BR2_PACKAGE_CYPRESS_BSA
+choice
+	default BR2_PACKAGE_CYPRESS_BSA_AWCM256
+    prompt "wifi/bt chip support"
+
+	config BR2_PACKAGE_CYPRESS_BSA_AWCM256
+		bool "AW-CM256"
+	config BR2_PACKAGE_CYPRESS_BSA_AWNB197
+		bool "AW-NB197"
+endchoice
+endif

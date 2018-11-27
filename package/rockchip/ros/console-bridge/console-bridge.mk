@@ -1,0 +1,11 @@
+CONSOLE_BRIDGE_VERSION = 0.2.7
+
+CONSOLE_BRIDGE_SITE = https://github.com/ros/console_bridge/archive
+CONSOLE_BRIDGE_SOURCE = $(CONSOLE_BRIDGE_VERSION).tar.gz
+
+CONSOLE_BRIDGE_CONF_OPTS += \
+	-DSTAGING_DIR="$(STAGING_DIR)"
+
+CONSOLE_BRIDGE_DEPENDENCIES = boost
+
+$(eval $(catkin-package))

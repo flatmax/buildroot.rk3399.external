@@ -1,0 +1,4 @@
+config BR2_PACKAGE_RKNPU
+	bool "rknpu"
+	help
+	  "Copy rknpu driver and test case"

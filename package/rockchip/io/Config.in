@@ -1,0 +1,4 @@
+config BR2_PACKAGE_IO
+	bool "io tool for linux"
+	help
+	  io tool for linux. used to read/write register, memory

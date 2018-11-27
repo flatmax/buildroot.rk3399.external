@@ -1,0 +1,172 @@
+menuconfig BR2_PACKAGE_ROCKCHIP
+	bool "rockchip BSP packages"
+
+if BR2_PACKAGE_ROCKCHIP
+choice
+	default BR2_PACKAGE_RV1108
+	prompt "rockchip chip support"
+
+config BR2_PACKAGE_RV1108
+	bool "rv1108 chip"
+	help
+		Use rockchip's rv1108 chip
+
+config BR2_PACKAGE_RK312X
+	bool "rk312X chip"
+	help
+		Use rockchip's rk312x chip
+
+config BR2_PACKAGE_RK3036_ECHO
+	bool "rk3036G chip"
+	help
+		Use rockchip's rk3036g chip
+
+config BR2_PACKAGE_RK3308
+    bool "rk3308 chip"
+    help
+        Use rockchip's rk3308 chip
+
+config BR2_PACKAGE_RK3128H
+    bool "rk3128H chip"
+    help
+        Use rockchip's rk3128H box chip
+
+config BR2_PACKAGE_RK3128
+    bool "rk3128 chip"
+    help
+        Use rockchip's rk3128 chip
+
+config BR2_PACKAGE_RK3399
+    bool "rk3399 chip"
+    help
+        Use rockchip's rk3399 chip
+
+config BR2_PACKAGE_RK3288
+    bool "rk3288 chip"
+    help
+        Use rockchip's rk3288 chip
+
+config BR2_PACKAGE_RK3326
+    bool "rk3326 chip"
+    help
+        Use rockchip's rk3326 chip
+
+config BR2_PACKAGE_PX30
+    bool "px30 chip"
+    help
+        Use rockchip's px30 chip
+
+config BR2_PACKAGE_PX3SE
+    bool "px3se chip"
+    help
+        Use rockchip's px3se chip
+
+config BR2_PACKAGE_RK1808
+    bool "rk1808 chip"
+    help
+        Use rockchip's rk1808 chip
+
+config BR2_PACKAGE_RK3399PRO_NPU
+    bool "rk3399pro npu chip"
+    help
+        Use rockchip's rk3399pro npu chip
+
+config BR2_PACKAGE_RK3328
+    bool "rk3328 chip"
+    help
+        Use rockchip's rk3328 chip
+
+config BR2_PACKAGE_RK3229
+    bool "rk3229 chip"
+    help
+        Use rockchip's rk3229 chip
+
+config BR2_PACKAGE_RK3036
+    bool "rk3036 chip"
+    help
+        Use rockchip's rk3036 chip
+
+endchoice
+
+
+
+# BSP packages
+source "package/rockchip/rv1108-firmware/Config.in"
+
+# Shared packages with all chips
+source "package/rockchip/ros/Config.in"
+source "package/rockchip/liblog/Config.in"
+source "package/rockchip/LocalPlayer/Config.in"
+source "package/rockchip/alexaClientSDK/Config.in"
+source "package/rockchip/DuerClientSDK/Config.in"
+source "package/rockchip/libcutils/Config.in"
+source "package/rockchip/drm_helper/Config.in"
+source "package/rockchip/mpp/Config.in"
+source "package/rockchip/adbd/Config.in"
+source "package/rockchip/gstreamer1-rockchip/Config.in"
+source "package/rockchip/gstreamer1-rockchip-extra/Config.in"
+source "package/rockchip/camera_engine_rkisp/Config.in"
+source "package/rockchip/camera_engine_cifisp/Config.in"
+source "package/rockchip/wakeWordAgent/Config.in"
+source "package/rockchip/pcba/Config.in"
+source "package/rockchip/softap/Config.in"
+source "package/rockchip/softapServer/Config.in"
+source "package/rockchip/wifiAutoSetup/Config.in"
+source "package/rockchip/gstreamer1-iep/Config.in"
+source "package/rockchip/gst1-libav-rk/Config.in"
+source "package/rockchip/rkwifibt/Config.in"
+source "package/rockchip/rockchip_utils/Config.in"
+source "package/rockchip/mdev_mount/Config.in"
+source "package/rockchip/alsa_capture/Config.in"
+source "package/rockchip/libmali/Config.in"
+source "package/rockchip/libhdmiset/Config.in"
+source "package/rockchip/dialserver/Config.in"
+source "package/rockchip/linux-rga/Config.in"
+source "package/rockchip/iflytekSDK/Config.in"
+source "package/rockchip/eq_drc_process/Config.in"
+source "package/rockchip/alsa_ladspa/Config.in"
+source "package/rockchip/rockchip_test/Config.in"
+source "package/rockchip/rockchip_modules/Config.in"
+source "package/rockchip/broadcom_bsa/Config.in"
+source "package/rockchip/cypress_bsa/Config.in"
+source "package/rockchip/pm-suspend-api/Config.in"
+source "package/rockchip/rtw_simple_config/Config.in"
+source "package/rockchip/recovery/Config.in"
+source "package/rockchip/update/Config.in"
+source "package/rockchip/modeset/Config.in"
+source "package/rockchip/rkjpeg/Config.in"
+source "package/rockchip/jpegdemo/Config.in"
+source "package/rockchip/ueventd/Config.in"
+source "package/rockchip/rkupdate/Config.in"
+source "package/rockchip/io/Config.in"
+source "package/rockchip/music/Config.in"
+source "package/rockchip/video/Config.in"
+source "package/rockchip/camera/Config.in"
+source "package/rockchip/carmachine/Config.in"
+source "package/rockchip/gallery/Config.in"
+source "package/rockchip/QLauncher/Config.in"
+source "package/rockchip/settings/Config.in"
+source "package/rockchip/powermanager/Config.in"
+source "package/rockchip/audioservice/Config.in"
+source "package/rockchip/securityAuth/Config.in"
+source "package/rockchip/recoverySystem/Config.in"
+source "package/rockchip/led_control_app/Config.in"
+source "package/rockchip/cae_vad/Config.in"
+source "package/rockchip/ipc_share_memory/Config.in"
+source "package/rockchip/rk_hw_vad/Config.in"
+source "package/rockchip/usbdevice/Config.in"
+source "package/rockchip/minigui/Config.in"
+source "package/rockchip/libpng12/Config.in"
+source "package/rockchip/kernel_modules/Config.in"
+source "package/rockchip/vendor_storage/Config.in"
+source "package/rockchip/partinit/Config.in"
+source "package/rockchip/glmarktest/Config.in"
+source "package/rockchip/tensorflow/Config.in"
+source "package/rockchip/rknpu/Config.in"
+source "package/rockchip/mtp/Config.in"
+source "package/rockchip/alsa-config/Config.in"
+source "package/rockchip/libcapsimage/Config.in"
+source "package/rockchip/rkscript/Config.in"
+source "package/rockchip/deviceio/Config.in"
+source "package/rockchip/ble_wificonfig/Config.in"
+endif

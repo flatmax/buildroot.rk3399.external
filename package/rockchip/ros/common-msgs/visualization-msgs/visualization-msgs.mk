@@ -1,0 +1,8 @@
+VISUALIZATION_MSGS_VERSION = 1.11.9
+VISUALIZATION_MSGS_SOURCE = $(VISUALIZATION_MSGS_VERSION).tar.gz
+VISUALIZATION_MSGS_SITE = https://github.com/ros/common_msgs/archive
+VISUALIZATION_MSGS_SUBDIR = visualization_msgs
+
+VISUALIZATION_MSGS_DEPENDENCIES = geometry-msgs
+
+$(eval $(catkin-package))

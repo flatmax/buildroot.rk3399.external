@@ -1,0 +1,4 @@
+config BR2_PACKAGE_VENDOR_STORAGE
+	bool "vendor storage tool for linux"
+	help
+	  vendor storage tool for linux. used to read/write vendor storage.

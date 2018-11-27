@@ -1,0 +1,39 @@
+menuconfig BR2_PACKAGE_RKWIFIBT
+    bool "rkwifibt"
+
+if BR2_PACKAGE_RKWIFIBT
+choice
+	default BR2_PACKAGE_RKWIFIBT_AWCM256
+    prompt "wifi chip support"
+
+config BR2_PACKAGE_RKWIFIBT_AP6181
+    bool "AP6181"
+config BR2_PACKAGE_RKWIFIBT_AP6255
+    bool "AP6255"
+config BR2_PACKAGE_RKWIFIBT_AP6212A1
+    bool "AP6212A1"
+config BR2_PACKAGE_RKWIFIBT_AP6354
+    bool "AP6354"
+config BR2_PACKAGE_RKWIFIBT_AP6236
+    bool "AP6236"
+config BR2_PACKAGE_RKWIFIBT_AWCM256
+    bool "AW-CM256"
+config BR2_PACKAGE_RKWIFIBT_AWNB197
+    bool "AW-NAB197"
+config BR2_PACKAGE_RKWIFIBT_RTL8723DS
+    bool "RTL8723DS"
+config BR2_PACKAGE_RKWIFIBT_RTL8189FS
+    bool "RTL8189FS"
+config BR2_PACKAGE_RKWIFIBT_COMPATIBLE
+    bool "Rockchip Compatible with all supported wifi"
+endchoice
+
+config BR2_PACKAGE_RKWIFIBT_BTUART
+	string "bt uart"
+	default "ttyS4"
+	depends on BR2_PACKAGE_RKWIFIBT
+	help
+		tty that bt used
+endif
+
+

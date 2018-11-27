@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# Start dsp firmware loading....
+#
+
+case "$1" in
+  start)
+	echo "Loading DSP firmware..."
+	echo 1 > /sys/class/firmware/rkdsp.bin/loading
+	cat /system/etc/firmware/rkdsp.bin > /sys/class/firmware/rkdsp.bin/data
+	echo 0 > /sys/class/firmware/rkdsp.bin/loading
+	;;
+  stop)
+	;;
+  restart|reload)
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?

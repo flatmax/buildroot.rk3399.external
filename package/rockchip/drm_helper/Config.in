@@ -1,0 +1,17 @@
+menuconfig BR2_PACKAGE_DRM_HELPER
+	bool "Drm Helper"
+	select BR2_PACKAGE_LIBDRM
+
+if BR2_PACKAGE_DRM_HELPER
+
+config BR2_PACKAGE_DRM_HELPER_ALLOCATOR
+	bool "drm allocator helper"
+	default y
+
+config BR2_PACKAGE_DRM_HELPER_DISPLAY
+	bool "drm display helper"
+	select BR2_PACKAGE_DRM_HELPER_ALLOCATOR
+	select BR2_PACKAGE_LINUX_RGA
+
+endif
+

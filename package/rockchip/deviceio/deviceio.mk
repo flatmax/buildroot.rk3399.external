@@ -1,0 +1,11 @@
+DEVICEIO_SITE = $(TOPDIR)/../external/deviceio
+DEVICEIO_SITE_METHOD = local
+DEVICEIO_INSTALL_STAGING = YES
+
+ifeq ($(BR2_PACKAGE_BLUEZ5_UTILS),y)
+DEVICEIO_CONF_OPTS += -DBLUEZ5_UTILS=TRUE
+endif
+
+$(eval $(cmake-package))
+
+

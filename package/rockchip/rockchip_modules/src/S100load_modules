@@ -1,0 +1,25 @@
+#!/bin/sh
+
+case "$1" in
+	start)
+		printf "load wifi modules: "
+		insmod /usr/lib/modules/jbd2.ko
+		insmod /usr/lib/modules/mbcache2.ko
+		insmod /usr/lib/modules/ext4.ko
+		insmod /usr/lib/modules/fat.ko
+		insmod /usr/lib/modules/vfat.ko
+		insmod /usr/lib/modules/ntfs.ko
+		[ $? = 0 ] && echo "OK" || echo "FAIL"
+		;;
+	stop)
+		;;
+	restart|reload)
+		$0 stop
+		$0 start
+		;;
+	*)
+		echo "Usage: $0 {start|stop|restart}"
+		exit 1
+esac
+
+exit 0

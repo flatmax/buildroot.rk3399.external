@@ -1,0 +1,2 @@
+config BR2_PACKAGE_PERF
+	bool "kernel perf"

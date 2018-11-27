@@ -1,0 +1,5 @@
+config BR2_PACKAGE_PARTINIT
+	bool "script for partition init"
+	depends on BR2_PACKAGE_USBMOUNT
+	help
+	  script for partition init.

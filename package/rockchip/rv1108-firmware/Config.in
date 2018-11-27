@@ -1,0 +1,4 @@
+config BR2_PACKAGE_RV1108_FIRMWARE
+	bool "rv1108 firmware"
+	depends on BR2_PACKAGE_RV1108
+

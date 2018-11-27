@@ -1,0 +1,13 @@
+config BR2_PACKAGE_RECOVERY
+	bool "Rockchip recovery for linux"
+        select BR2_PACKAGE_LIBDRM
+        select BR2_PACKAGE_LIBPNG
+        select BR2_PACKAGE_LIBPTHREAD_STUBS
+        select BR2_PACKAGE_LIBZ
+        select BR2_PACKAGE_DOSFSTOOLS
+        select BR2_PACKAGE_DOSFSTOOLS_FSCK_FAT
+        select BR2_PACKAGE_DOSFSTOOLS_MKFS_FAT
+        select BR2_PACKAGE_E2FSPROGS
+        select BR2_PACKAGE_E2FSPROGS_RESIZE2FS
+	help
+	  Rockchip recovery for linux.

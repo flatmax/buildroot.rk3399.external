@@ -1,0 +1,11 @@
+config BR2_PACKAGE_USBDEVICE
+	bool "script for USB device configure"
+	depends on BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_EUDEV
+	help
+	  script for USB device configure.
+
+config BR2_PACKAGE_USB_MASS_STORAGE
+	bool "usb mass storage config"
+	depends on BR2_PACKAGE_USBDEVICE
+	help
+	  usb mass storage config

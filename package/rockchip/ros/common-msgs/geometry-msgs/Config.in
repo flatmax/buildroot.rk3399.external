@@ -1,0 +1,5 @@
+config BR2_PACKAGE_GEOMETRY_MSGS
+    bool "geometry-msgs"
+    help
+        geometry-msgs provides messages for common geometric primitives
+        such as points, vectors, and poses
