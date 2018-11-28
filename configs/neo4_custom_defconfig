@@ -1,11 +1,40 @@
+# rockchip provided ...
+BR2_TARGET_GENERIC_HOSTNAME="rk3399"
+BR2_TARGET_GENERIC_ISSUE="Welcome to RK3399 Buildroot"
+BR2_PACKAGE_RKWIFIBT_COMPATIBLE=y
+#  - The rk3399 evb used the ttyS0 by default.
+BR2_PACKAGE_RKWIFIBT_BTUART="ttyS0"
+
 # neo4 specific from here on ...
-
-#include "rockchip_rk3399_defconfig"
-
+BR2_TARGET_ROOTFS_EXT2_SIZE="250M"
 BR2_DL_DIR="$(BASE_DIR)/../../buildroot.dl"
 
 #BR2_TOOLCHAIN_BUILDROOT_WCHAR=y
-#BR2_TARGET_ROOTFS_EXT2_SIZE="250M"
+
+BR2_GLOBAL_PATCH_DIR="$(BR2_EXTERNAL)/patches"
+
+# uboot
+BR2_TARGET_UBOOT=y
+BR2_PACKAGE_HOST_UBOOT_TOOLS=y
+BR2_TARGET_UBOOT_CUSTOM_GIT=y
+BR2_TARGET_UBOOT_BOARDNAME="rk3399"
+BR2_TARGET_UBOOT_CUSTOM_REPO_URL="https://github.com/flatmax/u-boot.neo4"
+BR2_TARGET_UBOOT_CUSTOM_REPO_VERSION="c4974f0b7adf419c378944c595ec6e782798896c"
+BR2_TARGET_UBOOT_NEEDS_ATF_BL31=y
+
+BR2_TARGET_UBOOT_NEEDS_DTC=y
+
+# Linux headers same as kernel, a 4.4 series
+BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_4=y
+BR2_LINUX_KERNEL=y
+BR2_LINUX_KERNEL_CUSTOM_GIT=y
+BR2_LINUX_KERNEL_CUSTOM_REPO_URL="https://github.com/friendlyarm/kernel-rockchip"
+BR2_LINUX_KERNEL_CUSTOM_REPO_VERSION="nanopi4-linux-v4.4.y"
+BR2_LINUX_KERNEL_USE_DEFCONFIG=y
+BR2_LINUX_KERNEL_DEFCONFIG="nanopi4_linux"
+BR2_LINUX_KERNEL_LZ4=y
+# their defconfig is nanopi4_linux_defconfig : http://wiki.friendlyarm.com/wiki/index.php/NanoPi_NEO4#Make_Your_Own_OS_Image
+# their build is : make ARCH=arm64 nanopi4-images
 
 # package options
 BR2_PACKAGE_FFTW_USE_NEON=y
@@ -27,6 +56,11 @@ BR2_PACKAGE_BUSYBOX_CONFIG_FRAGMENT_FILES="$(BR2_EXTERNAL)/configs/busybox.fragm
 # setup options
 BR2_ROOTFS_OVERLAY="$(BR2_EXTERNAL)/overlays"
 BR2_ROOTFS_USERS_TABLES="$(BR2_EXTERNAL)/users.txt"
+
+BR2_PACKAGE_HOST_GENIMAGE=y
+BR2_PACKAGE_HOST_MTOOLS=y
+BR2_ROOTFS_POST_BUILD_SCRIPT="$(BR2_EXTERNAL)/board/nanopi-neo4/post-build.sh"
+
 #BR2_ROOTFS_POST_BUILD_SCRIPT="$(BR2_EXTERNAL)/board/raspberrypi3-64/post-build.sh"
 #BR2_ROOTFS_POST_IMAGE_SCRIPT="$(BR2_EXTERNAL)/board/raspberrypi3-64/post-image.sh"
 

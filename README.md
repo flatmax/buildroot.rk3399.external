@@ -6,8 +6,9 @@ Clone buildroot. For example :
 
 ```
 cd yourPath
-git clone git@github.com:rockchip-linux/buildroot.git buildroot.rockchip
-git checkout rockchip/stable-rk3399-v2.09-20181102
+git clone git://git.busybox.net/buildroot
+#git clone git@github.com:rockchip-linux/buildroot.git buildroot.rockchip
+#git checkout rockchip/stable-rk3399-v2.09-20181102
 ```
 
 Make sure you have requirements :
