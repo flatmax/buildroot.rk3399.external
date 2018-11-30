@@ -5,6 +5,8 @@ BR2_PACKAGE_RKWIFIBT_COMPATIBLE=y
 #  - The rk3399 evb used the ttyS0 by default.
 BR2_PACKAGE_RKWIFIBT_BTUART="ttyS0"
 
+BR2_PACKAGE_SD_FUSE_RK3399=y
+
 # neo4 specific from here on ...
 BR2_TARGET_ROOTFS_EXT2_SIZE="250M"
 BR2_DL_DIR="$(BASE_DIR)/../../buildroot.dl"
@@ -32,7 +34,11 @@ BR2_LINUX_KERNEL_CUSTOM_REPO_URL="https://github.com/friendlyarm/kernel-rockchip
 BR2_LINUX_KERNEL_CUSTOM_REPO_VERSION="nanopi4-linux-v4.4.y"
 BR2_LINUX_KERNEL_USE_DEFCONFIG=y
 BR2_LINUX_KERNEL_DEFCONFIG="nanopi4_linux"
-BR2_LINUX_KERNEL_LZ4=y
+BR2_LINUX_KERNEL_IMAGE_TARGET_CUSTOM=y
+BR2_LINUX_KERNEL_IMAGE_TARGET_NAME="nanopi4-images"
+#BR2_LINUX_KERNEL_IMAGE_TARGET_NAME="rk3399-nanopi4-rev04.img"
+BR2_LINUX_KERNEL_IMAGE_NAME="../../../kernel.img"
+#BR2_LINUX_KERNEL_LZ4=y
 # their defconfig is nanopi4_linux_defconfig : http://wiki.friendlyarm.com/wiki/index.php/NanoPi_NEO4#Make_Your_Own_OS_Image
 # their build is : make ARCH=arm64 nanopi4-images
 
@@ -55,14 +61,15 @@ BR2_PACKAGE_BUSYBOX_CONFIG_FRAGMENT_FILES="$(BR2_EXTERNAL)/configs/busybox.fragm
 
 # setup options
 BR2_ROOTFS_OVERLAY="$(BR2_EXTERNAL)/overlays"
+BR2_ROOTFS_OVERLAY=""
 BR2_ROOTFS_USERS_TABLES="$(BR2_EXTERNAL)/users.txt"
 
 BR2_PACKAGE_HOST_GENIMAGE=y
 BR2_PACKAGE_HOST_MTOOLS=y
 BR2_ROOTFS_POST_BUILD_SCRIPT="$(BR2_EXTERNAL)/board/nanopi-neo4/post-build.sh"
+BR2_ROOTFS_POST_BUILD_SCRIPT=""
 
-#BR2_ROOTFS_POST_BUILD_SCRIPT="$(BR2_EXTERNAL)/board/raspberrypi3-64/post-build.sh"
-#BR2_ROOTFS_POST_IMAGE_SCRIPT="$(BR2_EXTERNAL)/board/raspberrypi3-64/post-image.sh"
+BR2_ROOTFS_POST_IMAGE_SCRIPT="$(BR2_EXTERNAL)/board/nanopi-neo4/post-build.sh"
 
 # external packages
 BR2_PACKAGE_NTP=y

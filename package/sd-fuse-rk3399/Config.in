@@ -1,0 +1,6 @@
+config BR2_PACKAGE_SD_FUSE_RK3399
+        bool "sd_fuse-rk3399"
+        help
+          sd_fuse-rk3399 package for creating sdcards for rockchip 3399 boards
+
+          https://github.com/friendlyarm/sd-fuse_rk3399
