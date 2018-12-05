@@ -2,7 +2,22 @@ Index: sd-fuse-rk3399-50dba2a64ab6128690407ba40ab190171749e07c/fusing.sh
 ===================================================================
 --- sd-fuse-rk3399-50dba2a64ab6128690407ba40ab190171749e07c.orig/fusing.sh
 +++ sd-fuse-rk3399-50dba2a64ab6128690407ba40ab190171749e07c/fusing.sh
-@@ -28,7 +28,7 @@ fi
+@@ -18,17 +18,17 @@
+ # http://www.gnu.org/licenses/gpl-2.0.html.
+ 
+ # Automatically re-run script under sudo if not root
+-if [ $(id -u) -ne 0 ]; then
+-	echo "Re-running script under sudo..."
+-	sudo "$0" "$@"
+-	exit
+-fi
++# if [ $(id -u) -ne 0 ]; then
++# 	echo "Re-running script under sudo..."
++# 	sudo "$0" "$@"
++# 	exit
++# fi
+ 
+ # ----------------------------------------------------------
  # Checking device for fusing
  
  if [ -z $1 ]; then
@@ -11,8 +26,12 @@ Index: sd-fuse-rk3399-50dba2a64ab6128690407ba40ab190171749e07c/fusing.sh
  	exit 0
  fi
  
-@@ -81,7 +81,7 @@ true ${TARGET_OS:=${2,,}}
- RKPARAM=./${TARGET_OS}/parameter.txt
+@@ -78,10 +78,10 @@ fi
+ 
+ true ${TARGET_OS:=${2,,}}
+ 
+-RKPARAM=./${TARGET_OS}/parameter.txt
++RKPARAM=$(dirname $0)/${TARGET_OS}/parameter.txt
  
  case ${2,,} in
 -friendlycore* | friendlydesktop* | lubuntu*)
@@ -20,6 +39,33 @@ Index: sd-fuse-rk3399-50dba2a64ab6128690407ba40ab190171749e07c/fusing.sh
  	;;
  eflasher*)
  	[ -f ./${TARGET_OS}/idbloader.img ] && touch ${RKPARAM} ;;
+@@ -120,7 +120,7 @@ fi
+ # ----------------------------------------------------------
+ # Fusing idbloader, bootloader, trust to card
+ 
+-true ${BOOT_DIR:=./prebuilt}
++true ${BOOT_DIR:=$(dirname $0)/prebuilt}
+ 
+ function fusing_bin() {
+ 	[ -z $2 -o ! -f $1 ] && return 1
+@@ -151,7 +151,7 @@ fi
+ # ----------------------------------------------------------
+ # partition card & fusing filesystem
+ 
+-true ${SD_UPDATE:=./tools/sd_update}
++true ${SD_UPDATE:=$(dirname $0)/tools/sd_update}
+ 
+ [[ -z $2 && ! -f ${RKPARAM} ]] && exit 0
+ 
+@@ -160,7 +160,7 @@ echo "${TARGET_OS^} filesystem fusing"
+ echo "Image root: `dirname ${RKPARAM}`"
+ echo
+ 
+-PARTMAP=./${TARGET_OS}/partmap.txt
++PARTMAP=$(dirname $0)/${TARGET_OS}/partmap.txt
+ 
+ if [ ! -f ${PARTMAP} ]; then
+ 	if [ -d ${BOOT_DIR}/${TARGET_OS} ]; then
 @@ -185,7 +185,7 @@ if [ $? -ne 0 ]; then
  
  else
@@ -47,6 +93,35 @@ Index: sd-fuse-rk3399-50dba2a64ab6128690407ba40ab190171749e07c/mkimage.sh
  	;;
  *)
  	echo "Error: Unsupported target OS: ${TARGET_OS}"
+@@ -57,8 +57,8 @@ eflasher)
+ 	RAW_FILE=${SOC}-eflasher-$(date +%Y%m%d).img
+ 	RAW_SIZE_MB=7800 ;;
+ *)
+-	RAW_FILE=${SOC}-${TARGET_OS}-sd4g-$(date +%Y%m%d).img
+-	RAW_SIZE_MB=3800 ;;
++	RAW_FILE=$(dirname $0)/../${SOC}-${TARGET_OS}-sd4g-$(date +%Y%m%d).img
++	RAW_SIZE_MB=7800 ;;
+ esac
+ 
+ BLOCK_SIZE=1024
+@@ -103,7 +103,7 @@ fi
+ # ----------------------------------------------------------
+ # Fusing all
+ 
+-true ${SD_FUSING:=./fusing.sh}
++true ${SD_FUSING:=$(dirname $0)/fusing.sh}
+ 
+ ${SD_FUSING} ${LOOP_DEVICE} ${TARGET_OS}
+ RET=$?
+@@ -113,7 +113,7 @@ if [ "x${TARGET_OS}" = "xeflasher" ]; th
+ fi
+ 
+ # cleanup
+-losetup -d ${LOOP_DEVICE}
++sudo losetup -d ${LOOP_DEVICE}
+ 
+ if [ ${RET} -ne 0 ]; then
+ 	echo "Error: ${RAW_FILE}: Fusing image failed, cleanup"
 @@ -125,4 +125,3 @@ echo "---------------------------------"
  echo "RAW image successfully created (`date +%T`)."
  ls -l ${RAW_FILE}
