@@ -100,7 +100,7 @@ Index: sd-fuse-rk3399-50dba2a64ab6128690407ba40ab190171749e07c/mkimage.sh
 -	RAW_FILE=${SOC}-${TARGET_OS}-sd4g-$(date +%Y%m%d).img
 -	RAW_SIZE_MB=3800 ;;
 +	RAW_FILE=$(dirname $0)/../${SOC}-${TARGET_OS}-sd4g-$(date +%Y%m%d).img
-+	RAW_SIZE_MB=7800 ;;
++	RAW_SIZE_MB=4000 ;;
  esac
  
  BLOCK_SIZE=1024

@@ -26,7 +26,13 @@ ln -sf ${BINARIES_DIR}/rootfs.ext2 ${BINARIES_DIR}/sd-fuse-rk3399/buildroot/root
 
 # create the sdcard image
 ${BINARIES_DIR}/sd-fuse-rk3399/mkimage.sh buildroot
-ln -sf ${BINARIES_DIR}/rk3399*.img ${BINARIES_DIR}/sdcard.img
+mv ${BINARIES_DIR}/sd-fuse-rk3399/rk3399*.img /tmp
+ln -sf /tmp/rk3399*.img ${BINARIES_DIR}/sdcard.img
+echo run the following for a slow sdcard install :
+echo dd if=${BINARIES_DIR}/sdcard.img of=/dev/sdxx buildroot
+
+echo run the following for a quick sdcard install :
+echo ${BINARIES_DIR}/sd-fuse-rk3399/fusing.sh /dev/sdxx buildroot
 
 # echo "Creating the params.bin file"
 # PARAMS_NAME=${BINARIES_DIR}/params.bin
