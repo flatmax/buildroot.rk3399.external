@@ -4,9 +4,8 @@
 #
 ################################################################################
 
-LIBMALI_VERSION = develop
-LIBMALI_SITE = $(TOPDIR)/../external/libmali
-LIBMALI_SITE_METHOD = local
+LIBMALI_VERSION = 721653b5b3b525a4f80d15aa7e2f9df7b7e60427
+LIBMALI_SITE = $(call github,rockchip-linux,libmali,$(LIBMALI_VERSION))
 
 define LIBMALI_RM_SO
 	$(TARGET_DIR)/usr/lib/libmali* \

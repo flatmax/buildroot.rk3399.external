@@ -31,15 +31,24 @@ else
     	return;
     fi
 
+    # remove libdrm so that we use the rockchip version
+    if [ -d "$BR_REPO_PATH/package/libdrm" ]; then
+      pushd $BR_REPO_PATH/package
+      tar zcpf libdrm.tgz libdrm
+      sed -i '/libdrm/d' Config.in
+      popd
+      rm -rf $BR_REPO_PATH/package/libdrm
+    fi
+
     cd $1
 
     # uncomment these to include them ...
     cat $CUSTOM_PATH/configs/rockchip/rk3399_arm64.config > $CUSTOM_PATH/configs/$BR_DEFCONFIG
     cat $CUSTOM_PATH/configs/rockchip/base.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
     cat $CUSTOM_PATH/configs/rockchip/base_extra.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
-    # cat $CUSTOM_PATH/configs/rockchip/gpu.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
-    # cat $CUSTOM_PATH/configs/rockchip/video_mpp.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
-    # cat $CUSTOM_PATH/configs/rockchip/video_gst.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
+    cat $CUSTOM_PATH/configs/rockchip/gpu.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
+    cat $CUSTOM_PATH/configs/rockchip/video_mpp.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
+    #cat $CUSTOM_PATH/configs/rockchip/video_gst.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
     # cat $CUSTOM_PATH/configs/rockchip/audio.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
     # cat $CUSTOM_PATH/configs/rockchip/camera.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
     # cat $CUSTOM_PATH/configs/rockchip/camera_gst.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
