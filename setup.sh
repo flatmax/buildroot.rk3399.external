@@ -39,6 +39,27 @@ else
       popd
       rm -rf $BR_REPO_PATH/package/libdrm
     fi
+    if [ -d "$BR_REPO_PATH/package/weston" ]; then
+      pushd $BR_REPO_PATH/package
+      tar zcpf weston.tgz weston
+      sed -i '/weston/d' Config.in
+      popd
+      rm -rf $BR_REPO_PATH/package/weston
+    fi
+    if [ -d "$BR_REPO_PATH/package/mesa3d" ]; then
+      pushd $BR_REPO_PATH/package
+      tar zcpf mesa3d.tgz mesa3d
+      sed -i '/mesa3d/d' Config.in
+      popd
+      rm -rf $BR_REPO_PATH/package/mesa3d
+    fi
+    if [ -d "$BR_REPO_PATH/package/mesa3d-headers" ]; then
+      pushd $BR_REPO_PATH/package
+      tar zcpf mesa3d-headers.tgz mesa3d-headers
+      sed -i '/mesa3d-headers/d' Config.in
+      popd
+      rm -rf $BR_REPO_PATH/package/mesa3d-headers
+    fi
 
     cd $1
 
@@ -57,10 +78,12 @@ else
     # cat $CUSTOM_PATH/configs/rockchip/benchmark.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
     # cat $CUSTOM_PATH/configs/rockchip/wifi.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
     # cat $CUSTOM_PATH/configs/rockchip/bt.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
-    # cat $CUSTOM_PATH/configs/rockchip/qt.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
-    # cat $CUSTOM_PATH/configs/rockchip/qt_app.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
+    cat $CUSTOM_PATH/configs/rockchip/qt.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
+    cat $CUSTOM_PATH/configs/rockchip/qt_app.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
 
     cat $CUSTOM_PATH/configs/$BR_CUSTOM_DEFCONFIG >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
 
     make BR2_EXTERNAL=$CUSTOM_PATH $BR_DEFCONFIG
 fi
+
+3409834 fix the overlays

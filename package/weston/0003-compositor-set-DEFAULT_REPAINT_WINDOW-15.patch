@@ -1,0 +1,26 @@
+From 10f5f1988dc73f702be86ed1cf24ce160d8a3234 Mon Sep 17 00:00:00 2001
+From: Binyuan Lan <lby@rock-chips.com>
+Date: Wed, 15 Mar 2017 09:30:26 +0800
+Subject: [PATCH] compositor: set DEFAULT_REPAINT_WINDOW 15
+
+Signed-off-by: Binyuan Lan <lby@rock-chips.com>
+---
+ libweston/compositor.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libweston/compositor.c b/libweston/compositor.c
+index 9ded23f..cddf1a9 100644
+--- a/libweston/compositor.c
++++ b/libweston/compositor.c
+@@ -64,7 +64,7 @@
+ #include "version.h"
+ #include "plugin-registry.h"
+ 
+-#define DEFAULT_REPAINT_WINDOW 7 /* milliseconds */
++#define DEFAULT_REPAINT_WINDOW 15 /* milliseconds */
+ 
+ static void
+ weston_output_transform_scale_init(struct weston_output *output,
+-- 
+1.9.1
+
