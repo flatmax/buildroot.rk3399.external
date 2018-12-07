@@ -6,7 +6,9 @@ Clone buildroot. For example :
 
 ```
 cd yourPath
-git clone git://git.busybox.net/buildroot
+git clone git://git.busybox.net/buildroot buildroot.neo4
+
+# these are from rockchip - but I suggest you use the stock buildroot
 #git clone git@github.com:rockchip-linux/buildroot.git buildroot.rockchip
 #git checkout rockchip/stable-rk3399-v2.09-20181102
 ```
@@ -46,8 +48,7 @@ NOTE: The following command will overwrite any disk attached to /dev/sdg
 NOTE: Be super careful here!
 
 ```
-sudo dd if=output/images/sdcard.img of=/dev/sdg
-
+sudo ./output/images/sd-fuse-rk3399/fusing.sh /dev/sdg buildroot
 ```
 
 # using
