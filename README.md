@@ -19,8 +19,10 @@ sudo apt-get install -y build-essential gcc g++ autoconf automake libtool bison 
 sudo apt-get install -y patch texinfo wget git gawk curl lzma bc quilt
 ```
 
-Make sure you are setup with bash :
-
+Clone the NanoPi.Neo4 external buildroot tree :
+```
+git clone git@github.com:flatmax/NanoPi.Neo4.buildroot.external.git NanoPi.Neo4
+```
 
 # To make the system
 
