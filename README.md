@@ -1,4 +1,4 @@
-# Inner ear simulator buildroot system
+# NanoPi Neo4 buildroot system
 
 # Initial setup
 
