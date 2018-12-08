@@ -55,4 +55,4 @@ sudo ./output/images/sd-fuse-rk3399/fusing.sh /dev/sdg buildroot
 
 # using
 
-After adding your RSA key to overlays/root/.ssh/authorized_keys, you will be able to ssh to the device.
+ssh in as user root, no pass. Or connect to the console debug uart with a serial cable.
