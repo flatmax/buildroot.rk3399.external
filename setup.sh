@@ -78,8 +78,8 @@ else
     # cat $CUSTOM_PATH/configs/rockchip/benchmark.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
     # cat $CUSTOM_PATH/configs/rockchip/wifi.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
     # cat $CUSTOM_PATH/configs/rockchip/bt.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
-    cat $CUSTOM_PATH/configs/rockchip/qt.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
-    cat $CUSTOM_PATH/configs/rockchip/qt_app.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
+    # cat $CUSTOM_PATH/configs/rockchip/qt.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
+    # cat $CUSTOM_PATH/configs/rockchip/qt_app.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
 
     cat $CUSTOM_PATH/configs/$BR_CUSTOM_DEFCONFIG >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
 
