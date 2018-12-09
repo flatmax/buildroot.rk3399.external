@@ -85,5 +85,3 @@ else
 
     make BR2_EXTERNAL=$CUSTOM_PATH $BR_DEFCONFIG
 fi
-
-3409834 fix the overlays
