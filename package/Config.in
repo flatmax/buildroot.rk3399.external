@@ -7,5 +7,5 @@ source "$BR2_EXTERNAL_NEO4_PATH/package/rockchip/bluez-alsa/Config.in"
 source "$BR2_EXTERNAL_NEO4_PATH/package/libdrm/Config.in"
 source "$BR2_EXTERNAL_NEO4_PATH/package/weston/Config.in"
 source "$BR2_EXTERNAL_NEO4_PATH/package/mesa3d/Config.in"
-
+source "$BR2_EXTERNAL_NEO4_PATH/package/libmali/Config.in"
 endmenu
