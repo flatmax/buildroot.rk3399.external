@@ -32,34 +32,13 @@ else
     fi
 
     # remove libdrm so that we use the rockchip version
-    if [ -d "$BR_REPO_PATH/package/libdrm" ]; then
-      pushd $BR_REPO_PATH/package
-      tar zcpf libdrm.tgz libdrm
-      sed -i '/libdrm/d' Config.in
-      popd
-      rm -rf $BR_REPO_PATH/package/libdrm
-    fi
-    if [ -d "$BR_REPO_PATH/package/weston" ]; then
-      pushd $BR_REPO_PATH/package
-      tar zcpf weston.tgz weston
-      sed -i '/weston/d' Config.in
-      popd
-      rm -rf $BR_REPO_PATH/package/weston
-    fi
-    if [ -d "$BR_REPO_PATH/package/mesa3d" ]; then
-      pushd $BR_REPO_PATH/package
-      tar zcpf mesa3d.tgz mesa3d
-      sed -i '/mesa3d/d' Config.in
-      popd
-      rm -rf $BR_REPO_PATH/package/mesa3d
-    fi
-    if [ -d "$BR_REPO_PATH/package/mesa3d-headers" ]; then
-      pushd $BR_REPO_PATH/package
-      tar zcpf mesa3d-headers.tgz mesa3d-headers
-      sed -i '/mesa3d-headers/d' Config.in
-      popd
-      rm -rf $BR_REPO_PATH/package/mesa3d-headers
-    fi
+    # if [ -d "$BR_REPO_PATH/package/libdrm" ]; then
+    #   pushd $BR_REPO_PATH/package
+    #   tar zcpf libdrm.tgz libdrm
+    #   sed -i '/libdrm/d' Config.in
+    #   popd
+    #   rm -rf $BR_REPO_PATH/package/libdrm
+    # fi
 
     cd $1
 

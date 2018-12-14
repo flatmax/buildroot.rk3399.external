@@ -1,0 +1,4 @@
+0004-drm_fourcc-add-DRM_FORMAT_NV12_10.patch
+0005-CHROMIUM-libdrm-add-support-for-rockchip.patch
+0006-CHROMIUM-rockchip-Add-API-to-create-BO-object-from-e.patch
+0007-Skip-busid-check-in-drmOpenByName.patch

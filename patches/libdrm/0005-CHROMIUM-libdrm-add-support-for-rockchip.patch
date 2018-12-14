@@ -1,36 +1,7 @@
-From 99471066c5b89e3d17d9bef47856126a68c4a209 Mon Sep 17 00:00:00 2001
-From: Mark Yao <mark.yao@rock-chips.com>
-Date: Wed, 8 Oct 2014 14:38:23 +0800
-Subject: [PATCH 1/2] CHROMIUM: libdrm: add support for rockchip
-
-This is the userspace counterpart to the kernel Rockchip DRM
-driver, which handles GEM buffer management.
-
-BUG=chrome-os-partner:32762
-BUG=b:26575005
-TEST=emerge-veyron libdrm; boot and display.
-
-Signed-off-by: Mark Yao <mark.yao@rock-chips.com>
-Change-Id: Iad042a2347be66672b9749987183c2c0f082d991
----
- Makefile.am                    |   5 +
- configure.ac                   |  13 ++
- rockchip/Makefile.am           |  20 +++
- rockchip/libdrm_rockchip.pc.in |  11 ++
- rockchip/rockchip_drm.c        | 274 +++++++++++++++++++++++++++++++++++++++++
- rockchip/rockchip_drm.h        |  73 +++++++++++
- rockchip/rockchip_drmif.h      |  75 +++++++++++
- 7 files changed, 471 insertions(+)
- create mode 100644 rockchip/Makefile.am
- create mode 100644 rockchip/libdrm_rockchip.pc.in
- create mode 100644 rockchip/rockchip_drm.c
- create mode 100644 rockchip/rockchip_drm.h
- create mode 100644 rockchip/rockchip_drmif.h
-
-diff --git a/Makefile.am b/Makefile.am
-index 7b86214e..df66abfe 100644
---- a/Makefile.am
-+++ b/Makefile.am
+Index: libdrm-2.4.96/Makefile.am
+===================================================================
+--- libdrm-2.4.96.orig/Makefile.am
++++ libdrm-2.4.96/Makefile.am
 @@ -90,6 +90,10 @@ if HAVE_ETNAVIV
  ETNAVIV_SUBDIR = etnaviv
  endif
@@ -50,11 +21,11 @@ index 7b86214e..df66abfe 100644
  	data \
  	tests \
  	$(MAN_SUBDIR)
-diff --git a/configure.ac b/configure.ac
-index fbbb0e38..e53a889c 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -157,6 +157,11 @@ AC_ARG_ENABLE(etnaviv-experimental-api,
+Index: libdrm-2.4.96/configure.ac
+===================================================================
+--- libdrm-2.4.96.orig/configure.ac
++++ libdrm-2.4.96/configure.ac
+@@ -158,6 +158,11 @@ AC_ARG_ENABLE(etnaviv-experimental-api,
  	      [Enable support for etnaviv's experimental API (default: disabled)]),
  	      [ETNAVIV=$enableval], [ETNAVIV=no])
  
@@ -66,9 +37,9 @@ index fbbb0e38..e53a889c 100644
  AC_ARG_ENABLE(install-test-programs,
  		  AS_HELP_STRING([--enable-install-test-programs],
  		  [Install test programs (default: no)]),
-@@ -446,6 +451,11 @@ if test "x$ETNAVIV" = xyes; then
- 	AC_DEFINE(HAVE_ETNAVIV, 1, [Have etnaviv support])
- fi
+@@ -457,6 +462,11 @@ fi
+ 
+ AM_CONDITIONAL(HAVE_ETNAVIV, [test "x$ETNAVIV" = xyes])
  
 +AM_CONDITIONAL(HAVE_ROCKCHIP, [test "x$ROCKCHIP" = xyes])
 +if test "x$ROCKCHIP" = xyes; then
@@ -76,9 +47,9 @@ index fbbb0e38..e53a889c 100644
 +fi
 +
  AM_CONDITIONAL(HAVE_INSTALL_TESTS, [test "x$INSTALL_TESTS" = xyes])
- if test "x$INSTALL_TESTS" = xyes; then
- 	AC_DEFINE(HAVE_INSTALL_TESTS, 1, [Install test programs])
-@@ -553,6 +563,8 @@ AC_CONFIG_FILES([
+ 
+ AC_ARG_ENABLE([cairo-tests],
+@@ -569,6 +579,8 @@ AC_CONFIG_FILES([
  	vc4/libdrm_vc4.pc
  	etnaviv/Makefile
  	etnaviv/libdrm_etnaviv.pc
@@ -87,17 +58,16 @@ index fbbb0e38..e53a889c 100644
  	tests/Makefile
  	tests/modeprint/Makefile
  	tests/modetest/Makefile
-@@ -586,4 +598,5 @@ echo "  Freedreno API  $FREEDRENO (kgsl: $FREEDRENO_KGSL)"
+@@ -602,4 +614,5 @@ echo "  Freedreno API  $FREEDRENO (kgsl:
  echo "  Tegra API      $TEGRA"
  echo "  VC4 API        $VC4"
  echo "  Etnaviv API    $ETNAVIV"
 +echo "  Rockchip API   $ROCKCHIP"
  echo ""
-diff --git a/rockchip/Makefile.am b/rockchip/Makefile.am
-new file mode 100644
-index 00000000..2ebb82f1
+Index: libdrm-2.4.96/rockchip/Makefile.am
+===================================================================
 --- /dev/null
-+++ b/rockchip/Makefile.am
++++ libdrm-2.4.96/rockchip/Makefile.am
 @@ -0,0 +1,20 @@
 +AM_CFLAGS = \
 +	$(WARN_CFLAGS) \
@@ -119,11 +89,10 @@ index 00000000..2ebb82f1
 +
 +pkgconfigdir = @pkgconfigdir@
 +pkgconfig_DATA = libdrm_rockchip.pc
-diff --git a/rockchip/libdrm_rockchip.pc.in b/rockchip/libdrm_rockchip.pc.in
-new file mode 100644
-index 00000000..13f22ac7
+Index: libdrm-2.4.96/rockchip/libdrm_rockchip.pc.in
+===================================================================
 --- /dev/null
-+++ b/rockchip/libdrm_rockchip.pc.in
++++ libdrm-2.4.96/rockchip/libdrm_rockchip.pc.in
 @@ -0,0 +1,11 @@
 +prefix=@prefix@
 +exec_prefix=@exec_prefix@
@@ -136,11 +105,10 @@ index 00000000..13f22ac7
 +Libs: -L${libdir} -ldrm_rockchip
 +Cflags: -I${includedir} -I${includedir}/libdrm
 +Requires.private: libdrm
-diff --git a/rockchip/rockchip_drm.c b/rockchip/rockchip_drm.c
-new file mode 100644
-index 00000000..20a83d5c
+Index: libdrm-2.4.96/rockchip/rockchip_drm.c
+===================================================================
 --- /dev/null
-+++ b/rockchip/rockchip_drm.c
++++ libdrm-2.4.96/rockchip/rockchip_drm.c
 @@ -0,0 +1,274 @@
 +/*
 + * Copyright (C) ROCKCHIP, Inc.
@@ -416,11 +384,10 @@ index 00000000..20a83d5c
 +
 +	return bo->vaddr;
 +}
-diff --git a/rockchip/rockchip_drm.h b/rockchip/rockchip_drm.h
-new file mode 100644
-index 00000000..13977d59
+Index: libdrm-2.4.96/rockchip/rockchip_drm.h
+===================================================================
 --- /dev/null
-+++ b/rockchip/rockchip_drm.h
++++ libdrm-2.4.96/rockchip/rockchip_drm.h
 @@ -0,0 +1,73 @@
 +/*
 + * Copyright (c) Fuzhou Rockchip Electronics Co.Ltd
@@ -495,11 +462,10 @@ index 00000000..13977d59
 +		DRM_ROCKCHIP_GEM_MAP_OFFSET, struct drm_rockchip_gem_map_off)
 +
 +#endif
-diff --git a/rockchip/rockchip_drmif.h b/rockchip/rockchip_drmif.h
-new file mode 100644
-index 00000000..30a875b2
+Index: libdrm-2.4.96/rockchip/rockchip_drmif.h
+===================================================================
 --- /dev/null
-+++ b/rockchip/rockchip_drmif.h
++++ libdrm-2.4.96/rockchip/rockchip_drmif.h
 @@ -0,0 +1,75 @@
 +/*
 + * Copyright (C) ROCKCHIP, Inc.
@@ -576,6 +542,3 @@ index 00000000..30a875b2
 +uint32_t rockchip_bo_handle(struct rockchip_bo *bo);
 +void *rockchip_bo_map(struct rockchip_bo *bo);
 +#endif /* ROCKCHIP_DRMIF_H_ */
--- 
-2.11.0
-

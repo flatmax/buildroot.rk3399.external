@@ -2,10 +2,98 @@ menu "Packages"
 source "$BR2_EXTERNAL_NEO4_PATH/package/gtkiostream/Config.in"
 source "$BR2_EXTERNAL_NEO4_PATH/package/sd-fuse-rk3399/Config.in"
 source "$BR2_EXTERNAL_NEO4_PATH/package/rockchip/Config.in"
-source "$BR2_EXTERNAL_NEO4_PATH/package/rockchip/bluez-alsa/Config.in"
+#source "$BR2_EXTERNAL_NEO4_PATH/package/rockchip/bluez-alsa/Config.in"
 
-source "$BR2_EXTERNAL_NEO4_PATH/package/libdrm/Config.in"
-source "$BR2_EXTERNAL_NEO4_PATH/package/weston/Config.in"
-source "$BR2_EXTERNAL_NEO4_PATH/package/mesa3d/Config.in"
 source "$BR2_EXTERNAL_NEO4_PATH/package/libmali/Config.in"
 endmenu
+
+menuconfig BR2_PACKAGE_ROCKCHIP
+	bool "rockchip BSP packages"
+
+if BR2_PACKAGE_ROCKCHIP
+choice
+	default BR2_PACKAGE_RV1108
+	prompt "rockchip chip support"
+
+config BR2_PACKAGE_RV1108
+	bool "rv1108 chip"
+	help
+		Use rockchip's rv1108 chip
+
+config BR2_PACKAGE_RK312X
+	bool "rk312X chip"
+	help
+		Use rockchip's rk312x chip
+
+config BR2_PACKAGE_RK3036_ECHO
+	bool "rk3036G chip"
+	help
+		Use rockchip's rk3036g chip
+
+config BR2_PACKAGE_RK3308
+    bool "rk3308 chip"
+    help
+        Use rockchip's rk3308 chip
+
+config BR2_PACKAGE_RK3128H
+    bool "rk3128H chip"
+    help
+        Use rockchip's rk3128H box chip
+
+config BR2_PACKAGE_RK3128
+    bool "rk3128 chip"
+    help
+        Use rockchip's rk3128 chip
+
+config BR2_PACKAGE_RK3399
+    bool "rk3399 chip"
+    help
+        Use rockchip's rk3399 chip
+
+config BR2_PACKAGE_RK3288
+    bool "rk3288 chip"
+    help
+        Use rockchip's rk3288 chip
+
+config BR2_PACKAGE_RK3326
+    bool "rk3326 chip"
+    help
+        Use rockchip's rk3326 chip
+
+config BR2_PACKAGE_PX30
+    bool "px30 chip"
+    help
+        Use rockchip's px30 chip
+
+config BR2_PACKAGE_PX3SE
+    bool "px3se chip"
+    help
+        Use rockchip's px3se chip
+
+config BR2_PACKAGE_RK1808
+    bool "rk1808 chip"
+    help
+        Use rockchip's rk1808 chip
+
+config BR2_PACKAGE_RK3399PRO_NPU
+    bool "rk3399pro npu chip"
+    help
+        Use rockchip's rk3399pro npu chip
+
+config BR2_PACKAGE_RK3328
+    bool "rk3328 chip"
+    help
+        Use rockchip's rk3328 chip
+
+config BR2_PACKAGE_RK3229
+    bool "rk3229 chip"
+    help
+        Use rockchip's rk3229 chip
+
+config BR2_PACKAGE_RK3036
+    bool "rk3036 chip"
+    help
+        Use rockchip's rk3036 chip
+
+endchoice
+endif
