@@ -1,0 +1,21 @@
+config BR2_PACKAGE_NANOPI_SCRIPTS
+        bool "nanopi scripts"
+	help
+		Nanopi scripts
+
+config BR2_PACKAGE_NANOPI_SCRIPTS_INIT_WESTON
+	bool "nanopi scripts init weston"
+	select BR2_PACKAGE_LIBMALI
+	select BR2_PACKAGE_LIBMALI
+	select BR2_PACKAGE_MESA3D
+	select BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_SWRAST
+	select BR2_PACKAGE_MESA3D_OPENGL_EGL
+	select BR2_PACKAGE_MESA3D_OPENGL_ES
+	select BR2_PACKAGE_WAYLAND
+	select BR2_PACKAGE_WESTON
+	select BR2_PACKAGE_WESTON_DRM
+	select BR2_PACKAGE_MPP
+	select BR2_PACKAGE_MPP_ALLOCATOR_DRM
+	select BR2_PACKAGE_LINUX_RGA
+	help
+	  Autostart weston

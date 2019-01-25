@@ -1,0 +1,20 @@
+#!/bin/sh
+
+case "$1" in
+    start)
+        echo "Starting weston"
+        . /usr/bin/startWeston.sh
+        ;;
+
+    stop)
+        echo "Stopping weston"
+        . /root/stopWeston.sh
+        ;;
+
+    *)
+        echo "Usage: $0 start"
+        exit 1
+        ;;
+esac
+
+exit $?
