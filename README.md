@@ -7,6 +7,7 @@ Clone buildroot. For example :
 ```
 cd yourPath
 git clone git://git.busybox.net/buildroot buildroot.neo4
+cd buildroot.neo4
 git checkout e1a43490e9ab24a3a249ab1224e236db47c53145
 
 # these are from rockchip - but I suggest you use the stock buildroot
