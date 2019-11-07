@@ -4,8 +4,13 @@
 #
 ################################################################################
 
-LIBMALI_VERSION = 721653b5b3b525a4f80d15aa7e2f9df7b7e60427
-LIBMALI_SITE = $(call github,rockchip-linux,libmali,$(LIBMALI_VERSION))
+LIBMALI_VERSION = 1d3f41704963d96039e1c0c6a2748337830da12b
+LIBMALI_SITE = $(call github,flatmax,libmali-rk3399,$(LIBMALI_VERSION))
+LIBMALI_DEPENDENCIES = host-pkgconf libdrm
+
+define LIBMALI_BUILD_CMDS
+	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D) all
+endef
 
 define LIBMALI_RM_SO
 	$(TARGET_DIR)/usr/lib/libmali* \
@@ -23,8 +28,8 @@ define LIBMALI_LINK_SO
 	ln -s libmali.so libMali.so && \
 	ln -s libmali.so libEGL.so && \
 	ln -s libmali.so libEGL.so.1 && \
-	ln -s libmali.so libgbm.so && \
-	ln -s libmali.so libgbm.so.1 && \
+	ln -s libgbm.so.1.0.0 libgbm.so.1 && \
+	ln -s libgbm.so.1 libgbm.so && \
 	ln -s libmali.so libGLESv1_CM.so && \
 	ln -s libmali.so libGLESv1_CM.so.1 && \
 	ln -s libmali.so libGLESv2.so && \
@@ -38,85 +43,14 @@ define LIBMALI_LINK_OPENCL_SO
 	ln -s libmali.so libOpenCL.so
 endef
 
-ifeq ($(BR2_PACKAGE_RK3308),y)
-define LIBMALI_INSTALL_TARGET_CMDS
-endef
-endif
-
-ifeq ($(BR2_aarch64),y)
-ifeq ($(BR2_PACKAGE_RK3326),y)
-define LIBMALI_INSTALL_TARGET_CMDS
-	rm -f $(LIBMALI_RM_SO)
-	$(INSTALL) -D -m 644 $(@D)/lib/aarch64-linux-gnu/libmali-bifrost-g31-rxp0-wayland-gbm.so $(TARGET_DIR)/usr/lib/
-	cd $(TARGET_DIR)/usr/lib/ && ln -s libmali-bifrost-g31-rxp0-wayland-gbm.so libmali.so && $(LIBMALI_LINK_SO) && $(LIBMALI_LINK_OPENCL_SO) && cd -
-endef
-endif
-else
-define LIBMALI_INSTALL_TARGET_CMDS
-	rm -f $(LIBMALI_RM_SO)
-	$(INSTALL) -D -m 644 $(@D)/lib/arm-linux-gnueabihf/libmali-bifrost-g31-rxp0-wayland-gbm.so $(TARGET_DIR)/usr/lib/
-	cd $(TARGET_DIR)/usr/lib/ && ln -s libmali-bifrost-g31-rxp0-wayland-gbm.so libmali.so && $(LIBMALI_LINK_SO) && $(LIBMALI_LINK_OPENCL_SO) && cd -
-endef
-endif
-
-ifeq ($(BR2_aarch64),y)
-ifeq ($(BR2_PACKAGE_PX30),y)
-define LIBMALI_INSTALL_TARGET_CMDS
-	rm -f $(LIBMALI_RM_SO)
-        $(INSTALL) -D -m 644 $(@D)/lib/aarch64-linux-gnu/libmali-bifrost-g31-rxp0-wayland-gbm.so $(TARGET_DIR)/usr/lib/
-	cd $(TARGET_DIR)/usr/lib/ && ln -s libmali-bifrost-g31-rxp0-wayland-gbm.so libmali.so && $(LIBMALI_LINK_SO) && $(LIBMALI_LINK_OPENCL_SO) && cd -
-endef
-endif
-else
-define LIBMALI_INSTALL_TARGET_CMDS
-	rm -f $(LIBMALI_RM_SO)
-	$(INSTALL) -D -m 644 $(@D)/lib/arm-linux-gnueabihf/libmali-bifrost-g31-rxp0-wayland-gbm.so $(TARGET_DIR)/usr/lib/
-	cd $(TARGET_DIR)/usr/lib/ && ln -s libmali-bifrost-g31-rxp0-wayland-gbm.so libmali.so && $(LIBMALI_LINK_SO) && $(LIBMALI_LINK_OPENCL_SO) && cd -
-endef
-endif
-
-ifeq ($(BR2_PACKAGE_PX3SE),y)
-define LIBMALI_INSTALL_TARGET_CMDS
-	rm -f $(LIBMALI_RM_SO)
-	$(INSTALL) -D -m 644 $(@D)/lib/arm-linux-gnueabihf/libmali-utgard-400-r7p0-r3p0-wayland.so $(TARGET_DIR)/usr/lib/
-	$(INSTALL) -D -m 755 $(@D)/overlay/S10libmali_px3se $(TARGET_DIR)/etc/init.d/S10libmali
-	$(INSTALL) -D -m 755 $(@D)/overlay/px3seBase $(TARGET_DIR)/usr/sbin/
-	cd $(TARGET_DIR)/usr/lib/ && ln -s libmali-utgard-400-r7p0-r3p0-wayland.so libmali.so && $(LIBMALI_LINK_SO) && cd -
-endef
-endif
-
-ifeq ($(BR2_PACKAGE_RK3128),y)
-define LIBMALI_INSTALL_TARGET_CMDS
-        rm -f $(LIBMALI_RM_SO)
-        $(INSTALL) -D -m 644 $(@D)/lib/arm-linux-gnueabihf/libmali-utgard-400-r7p0-r1p1-wayland.so $(TARGET_DIR)/usr/lib/
-        cd $(TARGET_DIR)/usr/lib/ && ln -s libmali-utgard-400-r7p0-r1p1-wayland.so libmali.so && $(LIBMALI_LINK_SO) && cd -
-endef
-endif
-
-ifeq ($(BR2_PACKAGE_RK3288),y)
-define LIBMALI_INSTALL_TARGET_CMDS
-	rm -f $(LIBMALI_RM_SO)
-	$(INSTALL) -D -m 644 $(@D)/lib/arm-linux-gnueabihf/libmali-midgard-t76x-r14p0-r0p0-wayland.so $(TARGET_DIR)/usr/lib/
-	$(INSTALL) -D -m 644 $(@D)/lib/arm-linux-gnueabihf/libmali-midgard-t76x-r14p0-r1p0-wayland.so $(TARGET_DIR)/usr/lib/
-	$(INSTALL) -D -m 755 $(@D)/overlay/S10libmali_rk3288 $(TARGET_DIR)/etc/init.d/S10libmali
-	cd $(TARGET_DIR)/usr/lib/ && $(LIBMALI_LINK_SO) && $(LIBMALI_LINK_OPENCL_SO) && cd -
-endef
-endif
-
 ifeq ($(BR2_PACKAGE_RK3399),y)
 define LIBMALI_INSTALL_TARGET_CMDS
 	rm -f $(LIBMALI_RM_SO)
-	$(INSTALL) -D -m 644 $(@D)/lib/aarch64-linux-gnu/libmali-midgard-t86x-r14p0-wayland.so $(TARGET_DIR)/usr/lib/
+	$(INSTALL) -D -m 644 $(@D)/lib/libgbm.so.1.0.0 $(TARGET_DIR)/usr/lib/
+	$(INSTALL) -D -m 644 $(@D)/lib/libmali-midgard-t86x-r14p0-wayland.so $(TARGET_DIR)/usr/lib/
 	cd $(TARGET_DIR)/usr/lib/ && ln -s libmali-midgard-t86x-r14p0-wayland.so libmali.so && $(LIBMALI_LINK_SO) && $(LIBMALI_LINK_OPENCL_SO) && cd -
 endef
+else
+	error do not know how to handle other archs.
 endif
-
-ifeq ($(BR2_PACKAGE_RK3328),y)
-define LIBMALI_INSTALL_TARGET_CMDS
-	rm -f $(LIBMALI_RM_SO)
-	$(INSTALL) -D -m 644 $(@D)/lib/aarch64-linux-gnu/libmali-utgard-450-r7p0-r0p0-wayland.so $(TARGET_DIR)/usr/lib/
-	cd $(TARGET_DIR)/usr/lib/ && ln -s libmali-utgard-450-r7p0-r0p0-wayland.so libmali.so && $(LIBMALI_LINK_SO) && $(LIBMALI_LINK_OPENCL_SO) && cd -
-endef
-endif
-
 $(eval $(generic-package))
