@@ -8,7 +8,9 @@ Clone buildroot. For example :
 cd yourPath
 git clone git://git.busybox.net/buildroot buildroot.neo4
 cd buildroot.neo4
-git checkout e1a43490e9ab24a3a249ab1224e236db47c53145
+
+# this version builds webengine ok - however requires the webview package form this repo to build qt5webview
+git checkout a946657b6e40924a746d1bd86eb023158abd1ab8
 
 # these are from rockchip - but I suggest you use the stock buildroot
 #git clone git@github.com:rockchip-linux/buildroot.git buildroot.rockchip
