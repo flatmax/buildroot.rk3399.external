@@ -4,11 +4,13 @@ case "$1" in
     start)
         echo "Starting weston"
         . /usr/bin/startWeston.sh
+        chown root.video /dev/mali0
+        chmod g+rw /dev/mali0
         ;;
 
     stop)
         echo "Stopping weston"
-        . /root/stopWeston.sh
+        . /usr/bin/stopWeston.sh
         ;;
 
     *)
