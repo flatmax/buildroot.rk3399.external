@@ -9,8 +9,8 @@ cd yourPath
 git clone git://git.busybox.net/buildroot buildroot.neo4
 cd buildroot.neo4
 
-# this version builds webengine ok - however requires the webview package form this repo to build qt5webview
-git checkout a946657b6e40924a746d1bd86eb023158abd1ab8
+# tested with the following repo commit
+git checkout 72e447e251ae5967fb6a2d898e9e1212aa6a640e
 
 # these are from rockchip - but I suggest you use the stock buildroot
 #git clone git@github.com:rockchip-linux/buildroot.git buildroot.rockchip
