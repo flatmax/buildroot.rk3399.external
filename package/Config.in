@@ -1,6 +1,6 @@
 menu "Packages"
 source "$BR2_EXTERNAL_NEO4_PATH/package/gtkiostream/Config.in"
-source "$BR2_EXTERNAL_NEO4_PATH/package/sd-fuse-rk3399/Config.in"
+#source "$BR2_EXTERNAL_NEO4_PATH/package/sd-fuse-rk3399/Config.in"
 source "$BR2_EXTERNAL_NEO4_PATH/package/rktools/Config.in"
 source "$BR2_EXTERNAL_NEO4_PATH/package/rkbin/Config.in"
 source "$BR2_EXTERNAL_NEO4_PATH/package/rockchip/Config.in"
