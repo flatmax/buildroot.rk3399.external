@@ -1,0 +1,9 @@
+/dts-v1/;
+/plugin/;
+
+// Audioinjector.net example dts overlay for the rk33xx
+
+/ {
+	compatible = "rockchip,rk3399";
+
+};
