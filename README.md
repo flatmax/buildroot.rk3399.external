@@ -1,5 +1,7 @@
 # NanoPi Neo4 buildroot system
 
+Successfully build sdcards or use fastboot with this repo for the Friendly ARM Nano Pi M4. The boot system is setup for device tree overlay loading and application. The build uses the mainline Linux kernel and mainline uboot.
+
 # Initial setup
 
 Clone buildroot. For example :
