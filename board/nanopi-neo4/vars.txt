@@ -1,3 +1,3 @@
-overlays=
-fdt_name=rockchip/rk3399-nanopi4-m4.dtb
+overlays=module-overlay-rk33xx
+fdt_name=rockchip/rk3399-nanopi-m4.dtb
 kernel_name=Image

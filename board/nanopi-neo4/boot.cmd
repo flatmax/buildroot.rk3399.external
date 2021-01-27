@@ -1,21 +1,14 @@
-# var.txt loading is throwing errors : "Synchronous Abort" handler, esr
-# skipped for now
-#echo "loading boot vars"
-#setenv load_addr "0x9000000"
-#load mmc ${devnum} ${load_addr} vars.txt
-#echo importing vars of size ${filesize}
-#env import -t ${load_addr} ${filesize}
+setenv load_addr "0x6000000"
+echo "loading boot vars"
+load mmc ${devnum} ${load_addr} vars.txt
+env import -t ${load_addr} ${filesize}
 
-echo setting bootargs
+echo setting bootargs then loading the fdt and kernel
 setenv bootargs "root=/dev/mmcblk1p2 earlyprintk console=ttyS2,115200n8 rw rootwait"
-echo loading dtb
-#fatload mmc ${devnum}:${distro_bootpart} ${fdt_addr_r} ${fdt_name}
-fatload mmc ${devnum}:${distro_bootpart} ${fdt_addr_r} rockchip/rk3399-nanopi-m4.dtb
-echo loading kernel
-#fatload mmc ${devnum}:${distro_bootpart} ${kernel_addr_r} ${kernel_name}
-fatload mmc ${devnum}:${distro_bootpart} ${kernel_addr_r} Image
+fatload mmc ${devnum}:${distro_bootpart} ${fdt_addr_r} ${fdt_name}
+fatload mmc ${devnum}:${distro_bootpart} ${kernel_addr_r} ${kernel_name}
 
-echo loading overlays
+echo setting up fdt for overlays
 # append overlays as required
 setenv overlay_error "false"
 fdt addr ${fdt_addr_r}
@@ -29,8 +22,7 @@ for overlay_file in ${overlays}; do
 done
 if test "${overlay_error}" = "true"; then
 	echo "Error applying DT overlays, restoring original DT"
-  #fatload mmc ${devnum}:${distro_bootpart} ${fdt_addr_r} ${fdtfile}
-  fatload mmc ${devnum}:${distro_bootpart} ${fdt_addr_r} rockchip/rk3399-nanopi-m4.dtb
+  fatload mmc ${devnum}:${distro_bootpart} ${fdt_addr_r} ${fdtfile}
 fi
 echo booting
 booti ${kernel_addr_r} - ${fdt_addr_r}
