@@ -29,7 +29,8 @@ for overlay_file in ${overlays}; do
 done
 if test "${overlay_error}" = "true"; then
 	echo "Error applying DT overlays, restoring original DT"
-  fatload mmc ${devnum}:${distro_bootpart} ${fdt_addr_r} ${fdtfile}
+  #fatload mmc ${devnum}:${distro_bootpart} ${fdt_addr_r} ${fdtfile}
+  fatload mmc ${devnum}:${distro_bootpart} ${fdt_addr_r} rockchip/rk3399-nanopi-m4.dtb
 fi
 echo booting
 booti ${kernel_addr_r} - ${fdt_addr_r}
