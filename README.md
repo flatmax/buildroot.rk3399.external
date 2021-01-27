@@ -10,11 +10,7 @@ git clone git://git.busybox.net/buildroot buildroot.neo4
 cd buildroot.neo4
 
 # tested with the following repo commit
-git checkout 72e447e251ae5967fb6a2d898e9e1212aa6a640e
-
-# these are from rockchip - but I suggest you use the stock buildroot
-#git clone git@github.com:rockchip-linux/buildroot.git buildroot.rockchip
-#git checkout rockchip/stable-rk3399-v2.09-20181102
+git checkout 34cce93adb06608992023c44fa3245d1f1a3deb4
 ```
 
 Make sure you have requirements :
@@ -50,13 +46,15 @@ make
 
 Insert your sdcard into your drive and make sure it isn't mounted. Write the image to the disk.
 
-NOTE: The following command will overwrite any disk attached to /dev/sdg
-NOTE: Be super careful here!
+NOTE: The following command will overwrite any disk attached to $OF. Don't overwrite your root.
 
 ```
-sudo ./output/images/sd-fuse-rk3399/fusing.sh /dev/sdg buildroot
+OF=/dev/sdf; rootDrive=`mount | grep " / " | grep $OF`; if [ -z $rootDrive ]; then sudo umount $OF[123456789]; sudo dd if=output/images/sdcard.img of=$OF; else echo you are trying to overwrite your root drive; fi
 ```
 
 # using
 
-ssh in as user root, no pass. Or connect to the console debug uart with a serial cable.
+Connect to the console debug uart with a serial cable. Or, add the openssh-server pacakge to the buildsystem, then ssh in as user root, no pass.
+
+# TODO
+Try to move from the rockchip first stage bootloader to the uboot bootloader with BR2_TARGET_ARM_TRUSTED_FIRMWARE
