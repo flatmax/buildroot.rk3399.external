@@ -42,9 +42,9 @@ echo compilation done
 echo
 echo
 echo
-echo write your image to the sdcard, don\'t forget to change OF=/dev/sdc to your sdcard drive ...
+echo write your image to the sdcard, don\'t forget to change OF=/dev/sdb to your sdcard drive ...
 echo use the following command ...
 echo
-echo 'OF=/dev/sdc; rootDrive=`mount | grep " / " | grep $OF`; if [ -z $rootDrive ]; then sudo umount $OF[123456789]; sudo dd if=output/images/sdcard.img of=$OF; else echo you are trying to overwrite your root drive; fi'
+echo 'OF=/dev/sdb; rootDrive=`mount | grep " / " | grep $OF`; if [ -z $rootDrive ]; then sudo umount $OF[123456789]; sudo dd if=output/images/sdcard.img of=$OF; else echo you are trying to overwrite your root drive; fi'
 echo
 echo
