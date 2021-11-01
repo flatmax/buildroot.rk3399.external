@@ -36,6 +36,9 @@ cp -a ${linuxDir}/arch/arm64/boot/dts/rockchip/rk3399-nanopi-m4.dtb $BINARIES_DI
 # generate the image
 $BASE_DIR/../support/scripts/genimage.sh -c ${boardDir}/genimage.cfg
 
+# generate Volumio requirements
+${boardDir}/mkRk3399Volumio.bin.sh ${BINARIES_DIR} rk3399 $linuxDir neo4
+
 echo
 echo
 echo compilation done
