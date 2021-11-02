@@ -19,17 +19,17 @@ rm -f $BINARIES_DIR/$MODEL.tar.xz
 
 # boot
 mkdir -p $VOL_DIR/u-boot
-cp $BINARIES_DIR/uboot.img $VOL_DIR/u-boot/u-boot.img
+cp $BINARIES_DIR/uboot.img $VOL_DIR/u-boot/uboot.img
 cp $BINARIES_DIR/boot.scr $VOL_DIR/u-boot/
 cp $BINARIES_DIR/vars.txt $VOL_DIR/u-boot/
 cp $BINARIES_DIR/trust.img $VOL_DIR/u-boot/
+cp $BINARIES_DIR/idbloader.img $VOL_DIR/u-boot/
 
 # Linux
 mkdir -p $VOL_DIR/boot
 cp $BINARIES_DIR/Image $VOL_DIR/boot/
 cp -a $BINARIES_DIR/rockchip $VOL_DIR/boot
 pushd $VOL_DIR/boot > /dev/null
-ln -s rockchip dtb
 popd
 
 pushd $LINUX_DIR > /dev/null
@@ -51,8 +51,8 @@ cp -a $BINARIES_DIR/../target/lib/firmware $VOL_DIR/lib
 mkdir $VOL_DIR/patches
 cp -a $boardDir/../../patches/linux/* $VOL_DIR/patches
 
-echo creating tar.bz2 file
+echo creating tar.xz file
 pushd $VOL_PLAT_DIR
-tar cfj $MODEL.tar.bz2 $MODEL
+tar cfJ $MODEL.tar.xz $MODEL
 popd
 mv $VOL_PLAT_DIR/$MODEL.tar.xz $BINARIES_DIR
