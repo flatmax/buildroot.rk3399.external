@@ -1,0 +1,3 @@
+verbosity=1
+volumio=imgpart=/dev/mmcblk1p2 imgfile=/volumio_current.sqsh
+console=ttyS2,115200n8
