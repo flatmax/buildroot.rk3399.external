@@ -31,7 +31,7 @@ env import -t ${load_addr} ${filesize}
 
 echo loading the ramdisk
 setenv volumioenv "/dev/mmcblk1p2"
-setenv bootargs "consoleblank=0 scandelay root=${volumioenv} rw console=${console} rootfstype=ext4 loglevel=${verbosity} rootwait ${extraargs} "
+setenv bootargs "consoleblank=0 scandelay root=${volumioenv} rw console=${console} rootfstype=ext4 loglevel=${verbosity} rootwait ${extraargs} imgpart=${volumioenv} imgfile=/volumio_current.sqsh"
 #setenv bootargs "root=${volumioenv} earlyprintk console=ttyS2,115200n8 rootfstype=ext4 loglevel=${verbosity} rw rootwait ${extraargs} "
 #fatload mmc ${devnum}:${distro_bootpart} ${ramdisk_addr_r} uInitrd
 fatload mmc ${devnum}:${distro_bootpart} 0x0a200000 uInitrd
