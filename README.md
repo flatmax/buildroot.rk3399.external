@@ -12,7 +12,7 @@ git clone git://git.busybox.net/buildroot buildroot.volumio
 cd buildroot.volumio
 
 # tested with the following repo commit (you may be able to use HEAD)
-git checkout bcde80febd2f0455ba5c34f8aa870fc8133749ae
+git checkout 34cce93adb06608992023c44fa3245d1f1a3deb4
 ```
 
 Make sure you have requirements :
