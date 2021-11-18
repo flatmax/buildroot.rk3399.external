@@ -53,8 +53,9 @@ BR2_LINUX_KERNEL=y
 BR2_LINUX_KERNEL_LATEST_VERSION=y
 ##BR2_LINUX_KERNEL_VERSION="5.10.10"
 BR2_LINUX_KERNEL_USE_ARCH_DEFAULT_CONFIG=y
-# change to target the M4 instead of the M4B
+# change to target the M4 uncomment the following DTB
 #BR2_LINUX_KERNEL_INTREE_DTS_NAME="rockchip/rk3399-nanopi-m4"
+# change target to the M4B uncomment the following DTB
 BR2_LINUX_KERNEL_INTREE_DTS_NAME="rockchip/rk3399-nanopi-m4b"
 BR2_LINUX_KERNEL_NEEDS_HOST_OPENSSL=y
 
