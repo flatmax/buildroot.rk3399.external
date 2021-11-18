@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # BOARD_DIR="$(dirname $0)"
-
 ubootName=`find $BASE_DIR/build -name 'uboot-*' -type d`
 boardDir=`dirname $_`
 
@@ -17,9 +16,11 @@ $RKTOOLS/loaderimage --pack --uboot $ubootName/u-boot-dtb.bin $BINARIES_DIR/uboo
 
 # Generate the uboot script
 $ubootName/tools/mkimage -C none -A arm -T script -d ${boardDir}/boot.cmd $BINARIES_DIR/boot.scr
+# alter the vars.txt file
+dtbName=`grep BR2_LINUX_KERNEL_INTREE_DTS_NAME $BR2_CONFIG | sed 's/^.*=//;s/"//g'`
+sed -i "s|.*fdt_name.*|fdt_name=$dtbName.dtb|" ${boardDir}/vars.txt
 # copy uboot variable file over
 cp -a ${boardDir}/vars.txt $BINARIES_DIR/
-
 #make the trust image
 ${boardDir}/mkRk3399Trust.bin.sh ${BINARIES_DIR} ${RKBIN} trust.img
 
@@ -31,7 +32,7 @@ fi
 if [ -d ${linuxDir}/arch/arm64/boot/dts/rockchip/overlay ]; then
   cp -a ${linuxDir}/arch/arm64/boot/dts/rockchip/overlay/*.dtbo $BINARIES_DIR/rockchip/overlays
 fi
-cp -a ${linuxDir}/arch/arm64/boot/dts/rockchip/rk3399-nanopi-m4.dtb $BINARIES_DIR/rockchip
+cp -a ${linuxDir}/arch/arm64/boot/dts/${dtbName}.dtb $BINARIES_DIR/rockchip
 
 # generate the image
 $BASE_DIR/../support/scripts/genimage.sh -c ${boardDir}/genimage.cfg
