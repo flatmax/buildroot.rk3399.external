@@ -1,7 +1,6 @@
-# rk3399 buildroot system
+# rk3399 chipset buildroot system
 
-Successfully build sdcards or use fastboot with this repo for the Friendly ARM Nano Pi M4. The boot system is setup for device tree overlay loading and application. The build uses the mainline Linux kernel and mainline uboot.
-
+Supporting some rk3399 based SbCs. Add your own variant.
 Supports the NanoPi M4 and M4B hardware, easily altered to support other rk3399 boards.
 
 # Initial setup
@@ -10,8 +9,8 @@ Clone buildroot. For example :
 
 ```
 cd yourPath
-git clone git://git.busybox.net/buildroot buildroot.volumio
-cd buildroot.volumio
+git clone git://git.busybox.net/buildroot buildroot.rk3399
+cd buildroot.rk3399
 
 # tested with the following repo commit (you may be able to use HEAD)
 git checkout 36602fd41ac27a37bb389316019ec1f8a77190cd
@@ -23,9 +22,9 @@ sudo apt-get install -y build-essential gcc g++ autoconf automake libtool bison 
 sudo apt-get install -y patch texinfo wget git gawk curl lzma bc quilt
 ```
 
-Clone the NanoPi.Neo4 external buildroot tree this supports the M4 and M4B :
+Clone the buildroot.rk3399.external external buildroot tree :
 ```
-git clone git@github.com:flatmax/buildroot.rk3399.volumio.external.git buildroot.rk3399.volumio.external
+git clone https://github.com/flatmax/buildroot.rk3399.external.git buildroot.rk3399.external
 ```
 # Setup for M4 or M4B versions
 
@@ -38,7 +37,7 @@ Alter the BR2_LINUX_KERNEL_INTREE_DTS_NAME in the neo4_custom_defconfig file. If
 # To make the system
 
 ```
-. buildroot.rk3399.volumio.external/setup.sh yourPath/buildroot.volumio
+. buildroot.rk3399.external/setup.sh yourPath/buildroot.rk3399
 ```
 
 # ensure you have your buildroot net downloads directory setup
