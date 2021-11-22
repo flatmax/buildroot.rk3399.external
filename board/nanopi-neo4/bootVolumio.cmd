@@ -1,4 +1,5 @@
 setenv load_addr "0x6000000"
+
 echo importing vars.txt
 load mmc ${devnum} ${load_addr} vars.txt
 env import -t ${load_addr} ${filesize}
@@ -30,11 +31,10 @@ load mmc ${devnum} ${load_addr} varsVolumio.txt
 env import -t ${load_addr} ${filesize}
 
 echo loading the ramdisk
-setenv volumioenv "/dev/mmcblk1p2"
-setenv bootargs "consoleblank=0 scandelay root=${volumioenv} rw console=${console} rootfstype=ext4 loglevel=${verbosity} rootwait ${extraargs} imgpart=${volumioenv} imgfile=/volumio_current.sqsh"
-#setenv bootargs "root=${volumioenv} earlyprintk console=ttyS2,115200n8 rootfstype=ext4 loglevel=${verbosity} rw rootwait ${extraargs} "
-#fatload mmc ${devnum}:${distro_bootpart} ${ramdisk_addr_r} uInitrd
-fatload mmc ${devnum}:${distro_bootpart} 0x0a200000 uInitrd
+setenv ramdisk_addr_r "0x0a200000"
+setenv bootargs "${volumioargs} consoleblank=0 scandelay console=${console} loglevel=${verbosity} ${extraargs}"
+echo bootargs
+echo ${bootargs}
+fatload mmc ${devnum}:${distro_bootpart} ${ramdisk_addr_r} uInitrd
 echo booting the kernel
-#booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
-booti ${kernel_addr_r} 0x0a200000 ${fdt_addr_r}
+booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
