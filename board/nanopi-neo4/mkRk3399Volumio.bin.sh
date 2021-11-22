@@ -62,3 +62,5 @@ pushd $VOL_PLAT_DIR
 tar cfJ $MODEL.tar.xz $MODEL
 popd
 mv $VOL_PLAT_DIR/$MODEL.tar.xz $BINARIES_DIR
+echo $VOL_PLAT_DIR now exists
+echo $MODEL.tar.xz located in the $BINARIES_DIR

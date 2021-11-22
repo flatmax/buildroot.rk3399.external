@@ -37,9 +37,6 @@ cp -a ${linuxDir}/arch/arm64/boot/dts/${dtbName}.dtb $BINARIES_DIR/rockchip
 # generate the image
 $BASE_DIR/../support/scripts/genimage.sh -c ${boardDir}/genimage.cfg
 
-# generate Volumio requirements
-${boardDir}/mkRk3399Volumio.bin.sh ${BINARIES_DIR} rk3399 $linuxDir m4 $ubootName/tools/mkimage
-
 echo
 echo
 echo compilation done
@@ -52,3 +49,9 @@ echo
 echo 'OF=/dev/sdb; rootDrive=`mount | grep " / " | grep $OF`; if [ -z $rootDrive ]; then sudo umount $OF[123456789]; sudo dd if=output/images/sdcard.img of=$OF; else echo you are trying to overwrite your root drive; fi'
 echo
 echo
+
+echo
+echo generating the volumio post image binaries.
+echo
+# generate Volumio requirements
+${boardDir}/mkRk3399Volumio.bin.sh ${BINARIES_DIR} rk3399 $linuxDir m4 $ubootName/tools/mkimage
