@@ -1,40 +1,51 @@
+echo "Setting defaults"
 setenv load_addr "0x6000000"
+# setenv ramdisk_addr_r "0x0a200000"
 
-echo importing vars.txt
+echo "Importing vars.txt"
 load mmc ${devnum} ${load_addr} vars.txt
 env import -t ${load_addr} ${filesize}
 
-echo setting bootargs then loading the fdt and kernel
-setenv bootargs "root=/dev/mmcblk1p2 earlyprintk console=ttyS2,115200n8 rw rootwait"
+echo "Loading the fdt and kernel"
 fatload mmc ${devnum}:${distro_bootpart} ${fdt_addr_r} ${fdt_name}
 fatload mmc ${devnum}:${distro_bootpart} ${kernel_addr_r} ${kernel_name}
 
-echo setting up fdt for overlays
+echo "Setting up fdt for overlays"
 # append overlays as required
-setenv overlay_error "false"
+
 fdt addr ${fdt_addr_r}
 fdt resize 65536
 for overlay_file in ${overlays}; do
   echo "loading overlay ${overlay_file}"
-	if fatload mmc ${devnum}:${distro_bootpart} ${load_addr} rockchip/overlays/${overlay_file}.dtbo; then
-		echo "Applying kernel provided DT overlay ${overlay_file}.dtbo"
-		fdt apply ${load_addr} || setenv overlay_error "true"
-	fi
+  if fatload mmc ${devnum}:${distro_bootpart} ${load_addr} rockchip/overlays/${overlay_file}.dtbo; then
+    echo "Applying kernel provided DT overlay ${overlay_file}.dtbo"
+    fdt apply ${load_addr} || setenv overlay_error "true"
+  fi
 done
 if test "${overlay_error}" = "true"; then
-	echo "Error applying DT overlays, restoring original DT"
+  echo "Error applying DT overlays, restoring original DT"
   fatload mmc ${devnum}:${distro_bootpart} ${fdt_addr_r} ${fdtfile}
 fi
 
-echo importing varsVolumio.txt
+echo "Importing varsVolumio.txt"
 load mmc ${devnum} ${load_addr} varsVolumio.txt
 env import -t ${load_addr} ${filesize}
 
-echo loading the ramdisk
-setenv ramdisk_addr_r "0x0a200000"
-setenv bootargs "${volumioargs} consoleblank=0 scandelay console=${console} loglevel=${verbosity} ${extraargs}"
-echo bootargs
-echo ${bootargs}
+echo "Setting volumioargs"
+setenv volumioargs "imgpart=${imgpart} imgfile=${imgfile} bootpart=${bootpart} datapart=${datapart} bootconfig=${bootconfig} hwdevice=${hwver}"
+echo "image partition:" ${imgpart}
+echo "image file:"      ${imgfile}
+echo "boot partition:"  ${bootpart}
+echo "data partition:"  ${datapart}
+echo "bootconfig:"      ${bootconfig}
+echo "hwdevice:"        ${hwver}
+echo "Setting bootargs"
+setenv bootargs "${volumioargs} loglevel=${verbosity} ${extraargs} consoleblank=0 scandelay earlyprintk console=ttyS2,1500000n8 rw rootwait"
+echo "bootargs:" ${bootargs}
+
+echo "Loading the ramdisk"
 fatload mmc ${devnum}:${distro_bootpart} ${ramdisk_addr_r} uInitrd
-echo booting the kernel
+
+echo "Booting the kernel"
 booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
+

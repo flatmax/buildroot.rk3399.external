@@ -1,3 +1,8 @@
 verbosity=8
-volumioargs=imgpart=/dev/mmcblk1p2 imgfile=/volumio_current.sqsh hwdevice=nanopim4 bootdev=mmcblk1
-consoleargs=console=ttyS2,115200n8 console=tty1
+imgpart=UUID= 
+imgfile=volumio_current.sqsh 
+bootpart=UUID= 
+datapart=UUID= 
+bootconfig=varsVolumio.txt 
+hwver=nanopim4b
+
