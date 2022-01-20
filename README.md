@@ -37,7 +37,7 @@ Alter the BR2_LINUX_KERNEL_INTREE_DTS_NAME in the neo4_custom_defconfig file. If
 # To make the system
 
 ```
-. buildroot.rk3399.external/setup.sh yourPath/buildroot.rk3399
+source buildroot.rk3399.external/setup.sh yourPath/buildroot.rk3399
 ```
 
 # ensure you have your buildroot net downloads directory setup
