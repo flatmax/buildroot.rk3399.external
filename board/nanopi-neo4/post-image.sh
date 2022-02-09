@@ -54,4 +54,4 @@ echo
 echo generating the volumio post image binaries.
 echo
 # generate Volumio requirements
-${boardDir}/mkRk3399Volumio.bin.sh ${BINARIES_DIR} rk3399 $linuxDir m4 $ubootName/tools/mkimage
+${boardDir}/mkRk3399Volumio.bin.sh ${BINARIES_DIR} rk3399 $linuxDir nanopim4 $ubootName/tools/mkimage
