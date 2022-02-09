@@ -20,8 +20,8 @@ rm -f $BINARIES_DIR/$MODEL.tar.xz
 
 # u-boot
 mkdir -p $VOL_DIR/u-boot
-cp $BINARIES_DIR/trust.img $VOL_DIR/u-boot/
-cp $BINARIES_DIR/idbloader.img $VOL_DIR/u-boot/
+cp $BINARIES_DIR/trust.img $VOL_DIR/u-boot/trust.bin
+cp $BINARIES_DIR/idbloader.img $VOL_DIR/u-boot/idbloader.bin
 cp $BINARIES_DIR/uboot.img $VOL_DIR/u-boot/uboot.img
 #cp $BINARIES_DIR/boot.scr $VOL_DIR/u-boot/
 
