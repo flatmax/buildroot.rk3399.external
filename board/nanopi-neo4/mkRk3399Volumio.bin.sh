@@ -46,11 +46,12 @@ cp $LINUX_DIR/.config $VOL_DIR/boot/config-${kver}
 cp $LINUX_DIR/.config $VOL_DIR/config-${kver}
 
 # modules and firmware
-mkdir -p $VOL_DIR/lib
-pushd $LINUX_DIR > /dev/null
-make modules_install ARCH=arm64 INSTALL_MOD_PATH=$VOL_DIR
-# # #make firmware_install ARCH=arm64 INSTALL_FW_PATH=$VOL_DIR/lib/firmware
-popd
+mkdir -p $VOL_DIR/lib/modules
+#pushd $LINUX_DIR > /dev/null
+#make modules_install ARCH=arm64 INSTALL_MOD_PATH=$VOL_DIR
+## # #make firmware_install ARCH=arm64 INSTALL_FW_PATH=$VOL_DIR/lib/firmware
+#popd
+cp -a $BINARIES_DIR/../target/lib/modules/* $VOL_DIR/lib/modules
 cp -a $BINARIES_DIR/../target/lib/firmware $VOL_DIR/lib
 
 # patches
