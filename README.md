@@ -32,7 +32,7 @@ Change the BR2_LINUX_KERNEL_INTREE_DTS_NAME variable in the neo4_custom_defconfi
 
 ## To add a different rk3399 platform
 
-Alter the BR2_LINUX_KERNEL_INTREE_DTS_NAME in the neo4_custom_defconfig file. If you have trouble booting check the u-boot BR2_TARGET_UBOOT_BOARD_DEFCONFIG variable and choose an appropriate one.
+Alter the BR2_LINUX_KERNEL_INTREE_DTS_NAME in the neo4_custom_defconfig file. If you have trouble booting check the u-boot BR2_TARGET_UBOOT_BOARD_DEFCONFIG variable and choose an appropriate one. Also check vars.txt for the correct dtb to load.
 
 # To make the system
 
