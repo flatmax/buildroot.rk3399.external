@@ -48,9 +48,9 @@ BR2_LINUX_KERNEL_CONFIG_FRAGMENT_FILES="$(BR2_EXTERNAL)/board/nanopi-neo4/kernel
 BR2_LINUX_KERNEL_LATEST_VERSION=y
 
 # change to target the M4 uncomment the following DTB
-BR2_LINUX_KERNEL_INTREE_DTS_NAME="rockchip/rk3399-nanopi-m4"
+#BR2_LINUX_KERNEL_INTREE_DTS_NAME="rockchip/rk3399-nanopi-m4"
 # change target to the M4B uncomment the following DTB
-#BR2_LINUX_KERNEL_INTREE_DTS_NAME="rockchip/rk3399-nanopi-m4b"
+BR2_LINUX_KERNEL_INTREE_DTS_NAME="rockchip/rk3399-nanopi-m4b"
 
 # package options
 BR2_PACKAGE_FFTW_USE_NEON=y
