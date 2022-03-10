@@ -16,8 +16,9 @@ $RKTOOLS/loaderimage --pack --uboot $ubootName/u-boot-dtb.bin $BINARIES_DIR/uboo
 
 # Generate the uboot script
 $ubootName/tools/mkimage -C none -A arm -T script -d ${boardDir}/boot.cmd $BINARIES_DIR/boot.scr
+
 # alter the vars.txt file
-dtbName=`grep BR2_LINUX_KERNEL_INTREE_DTS_NAME $BR2_CONFIG | sed 's/^.*=//;s/"//g'`
+dtbName=`grep ^BR2_LINUX_KERNEL_INTREE_DTS_NAME $BR2_CONFIG | sed 's/^.*=//;s/"//g'`
 sed -i "s|.*fdt_name.*|fdt_name=$dtbName.dtb|" ${boardDir}/vars.txt
 # copy uboot variable file over
 cp -a ${boardDir}/vars.txt $BINARIES_DIR/
