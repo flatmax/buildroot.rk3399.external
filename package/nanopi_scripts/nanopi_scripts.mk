@@ -21,7 +21,7 @@ endef
 
 ifeq ($(BR2_PACKAGE_NANOPI_SCRIPTS_INIT_WESTON),y)
   define NANOPI_SCRIPTS_INSTALL_INIT_SYSV
-    $(INSTALL) -D -m 755 $(@D)/S60weston $(TARGET_DIR)/etc/init.d/S60weston
+    $(INSTALL) -D -m 755 $(@D)/S99weston $(TARGET_DIR)/etc/init.d/S99weston
   endef
 endif
 
