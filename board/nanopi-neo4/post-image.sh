@@ -5,14 +5,13 @@ ubootName=`find $BASE_DIR/build -name 'uboot-*' -type d`
 boardDir=`dirname $_`
 
 RKBIN=$BINARIES_DIR/rkbin
-RKTOOLS=$RKBIN/tools
 
 #make the first stage boot loader
 $ubootName/tools/mkimage -n rk3399 -T rksd -d ${RKBIN}/bin/rk33/rk3399_ddr_800MHz_v1.24.bin $BINARIES_DIR/idbloader.img
 cat ${RKBIN}/bin/rk33/rk3399_miniloader_v1.24.bin >> $BINARIES_DIR/idbloader.img
 
 # uboot creation
-$RKTOOLS/loaderimage --pack --uboot $ubootName/u-boot-dtb.bin $BINARIES_DIR/uboot.img
+$RKBIN/tools/loaderimage --pack --uboot $ubootName/u-boot-dtb.bin $BINARIES_DIR/uboot.img
 
 # Generate the uboot script
 $ubootName/tools/mkimage -C none -A arm -T script -d ${boardDir}/boot.cmd $BINARIES_DIR/boot.scr

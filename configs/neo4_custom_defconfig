@@ -17,7 +17,6 @@ BR2_GLOBAL_PATCH_DIR="$(BR2_EXTERNAL)/patches"
 
 # Rock-Chip repos - mostly for sdcard image generation
 BR2_PACKAGE_RKBIN=y
-BR2_PACKAGE_RKTOOLS=y
 
 BR2_PACKAGE_BUSYBOX_CONFIG_FRAGMENT_FILES="$(BR2_EXTERNAL)/configs/busybox.fragment"
 
