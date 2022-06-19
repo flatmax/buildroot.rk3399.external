@@ -36,25 +36,12 @@
 				compatible = "simple-audio-card";
 				simple-audio-card,name = "test";
 				simple-audio-card,format="i2s";
-				/* simple-audio-card,mclk-fs = <256>; */
-	//				i2s-controller = <&i2s0>;
-				//simple-audio-card,frame-master = <&snd_cpu>;
-				//simple-audio-card,bitclock-master = <&snd_cpu>;
-
-				/* snd_cpu: simple-audio-card,cpu {
-						sound-dai = <&i2s0>;
-						//system-clock-frequency = <24576000>;
-				};
-				simple-audio-card,codec {
-						sound-dai = <&codec_test>;
-				}; */
 
 				simple-audio-card,bitclock-master = <&cpu_dai>;
 				simple-audio-card,frame-master = <&cpu_dai>;
 				simple-audio-card,mclk-fs = <256>;
 
 				cpu_dai: simple-audio-card,cpu {
-//									sound-dai = <&i2s_8ch_0>;
 					sound-dai = <&i2s0>;
 				};
 
@@ -66,7 +53,7 @@
 
 			i2s0_out: i2s0-out {
 	      #sound-dai-cells = <0>;
-	      compatible = "ti,pcm5102a";
+	      compatible = "flatmax,bare";
 	      status = "okay";
       };
 		};

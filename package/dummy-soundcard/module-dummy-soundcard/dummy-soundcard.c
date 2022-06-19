@@ -34,19 +34,11 @@ struct deqx_digi_rk3399 {
 	unsigned int mclk_44k;
 };
 
-SND_SOC_DAILINK_DEFS(digitalB,
-		     // DAILINK_COMP_ARRAY(COMP_CPU("src4xxx-portA")),
-		     // DAILINK_COMP_ARRAY(COMP_CODEC(NULL, "src4xxx-portB")));
-				 DAILINK_COMP_ARRAY(COMP_EMPTY()),
-		     DAILINK_COMP_ARRAY(COMP_CODEC(NULL, "src4xxx-portB")),
-		     DAILINK_COMP_ARRAY(COMP_EMPTY()));
-
 static struct snd_soc_dai_link deqx_digi_dais[] = {
 	{
 		.name = "Deqx Digi B",
 		.stream_name = "Deqx Digi B",
 		.dai_fmt = SND_SOC_DAIFMT_CBS_CFS|SND_SOC_DAIFMT_I2S|SND_SOC_DAIFMT_NB_NF,
-		SND_SOC_DAILINK_REG(digitalB),
 	},
 };
 
@@ -80,13 +72,11 @@ static int deqx_digi_probe(struct platform_device *pdev)
 	dev_set_drvdata(&pdev->dev, deqx_digi_rk3399);
 	snd_soc_card_set_drvdata(card, deqx_digi_rk3399);
 
-	deqx_digi_dais[0].platforms->of_node = of_parse_phandle(pdev->dev.of_node,
+	deqx_digi_dais[0].platform_of_node = of_parse_phandle(pdev->dev.of_node,
 							"i2s-controller", 0);
 
-	if (deqx_digi_dais[0].platforms->of_node) {
-		deqx_digi_dais[0].cpus->of_node = deqx_digi_dais[0].platforms->of_node;
-		// deqx_digi_dais[1].platforms->of_node = deqx_digi_dais[0].platforms->of_node;
-		// deqx_digi_dais[1].cpus->of_node = deqx_digi_dais[0].cpus->of_node;
+	if (deqx_digi_dais[0].platform_of_node) {
+		deqx_digi_dais[0].cpu_of_node = deqx_digi_dais[0].platform_of_node;
 	} else {
 		dev_err(&pdev->dev, "Property 'i2s-controller' missing or invalid\n");
 		return -EINVAL;
@@ -112,14 +102,14 @@ static int deqx_digi_probe(struct platform_device *pdev)
 			dev_info(&pdev->dev, "deqx_digi_probe deferring exit ret=%d\n",ret);
 		else
 			dev_info(&pdev->dev, "deqx_digi_probe ERROR exit ret=%d\n",ret);
-		return dev_err_probe(&pdev->dev, ret, "deqx_digi_probe exit\n");
+		return ret;
 	}
 	dev_info(&pdev->dev, "deqx_digi_probe exit\n");
 	return ret;
 
 	err_freeup_nodes:
-		if (deqx_digi_dais[0].platforms->of_node){
-			of_node_put(deqx_digi_dais[0].platforms->of_node); // free up the i2s_node
+		if (deqx_digi_dais[0].platform_of_node){
+			of_node_put(deqx_digi_dais[0].platform_of_node); // free up the i2s_node
 		}
 		if (deqx_digi_dais[0].codecs->of_node) {
 			of_node_put(deqx_digi_dais[0].codecs->of_node);
@@ -134,14 +124,8 @@ static int deqx_digi_remove(struct platform_device *pdev)
 
 	dev_info(&pdev->dev, "deqx_digi_remove enter\n");
 
-	if (deqx_digi_dais[0].platforms->of_node){
-		of_node_put(deqx_digi_dais[0].platforms->of_node); // free up the i2s_node
-		// deqx_digi_dais[1].platforms->of_node = deqx_digi_dais[0].platforms->of_node = NULL;
-		// deqx_digi_dais[1].cpus->of_node = deqx_digi_dais[0].cpus->of_node = NULL;
-	}
-	if (deqx_digi_dais[0].codecs->of_node) {
-		of_node_put(deqx_digi_dais[0].codecs->of_node);
-		// deqx_digi_dais[1].codecs->of_node = deqx_digi_dais[0].codecs->of_node = NULL;
+	if (deqx_digi_dais[0].platform_of_node){
+		of_node_put(deqx_digi_dais[0].platform_of_node); // free up the i2s_node
 	}
 
 	snd_soc_unregister_card(card);

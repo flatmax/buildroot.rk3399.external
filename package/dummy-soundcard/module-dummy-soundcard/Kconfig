@@ -1,6 +1,5 @@
 config SND_SOC_DUMMY_SOUNDCARD
         tristate "RK33xx platform machine driver example for a dummy soundcard"
-        select SND_SOC_PCM5102A
         default n
         help
           ALSA machine driver for a dummy soundcard
