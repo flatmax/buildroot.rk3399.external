@@ -46,8 +46,8 @@ else
     cat $CUSTOM_PATH/configs/rockchip/rk3399_arm64.config > $CUSTOM_PATH/configs/$BR_DEFCONFIG
     cat $CUSTOM_PATH/configs/rockchip/base.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
     cat $CUSTOM_PATH/configs/rockchip/base_extra.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
-    cat $CUSTOM_PATH/configs/rockchip/gpu.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
-    cat $CUSTOM_PATH/configs/rockchip/video_mpp.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
+#    cat $CUSTOM_PATH/configs/rockchip/gpu.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
+#    cat $CUSTOM_PATH/configs/rockchip/video_mpp.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
     #cat $CUSTOM_PATH/configs/rockchip/video_gst.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
     # cat $CUSTOM_PATH/configs/rockchip/audio.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
     # cat $CUSTOM_PATH/configs/rockchip/camera.config >> $CUSTOM_PATH/configs/$BR_DEFCONFIG
