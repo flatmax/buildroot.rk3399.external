@@ -13,7 +13,7 @@ git clone git://git.busybox.net/buildroot buildroot.rk3399
 cd buildroot.rk3399
 
 # tested with the following repo commit (you may be able to use HEAD)
-git checkout 2022.02
+git checkout 2022.05
 ```
 
 Make sure you have requirements :
