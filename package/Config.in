@@ -3,6 +3,7 @@ source "$BR2_EXTERNAL_NEO4_PATH/package/gtkiostream/Config.in"
 source "$BR2_EXTERNAL_NEO4_PATH/package/rkbin/Config.in"
 source "$BR2_EXTERNAL_NEO4_PATH/package/rockchip/Config.in"
 source "$BR2_EXTERNAL_NEO4_PATH/package/example-module-overlay/Config.in"
+source "$BR2_EXTERNAL_NEO4_PATH/package/dummy-soundcard/Config.in"
 
 source "$BR2_EXTERNAL_NEO4_PATH/package/nanopi_scripts/Config.in"
 
