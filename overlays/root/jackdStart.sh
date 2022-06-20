@@ -1,7 +1,7 @@
 #!/bin/sh
 killall aplay
 killall jackd
-DIGIDEV=hw:CARD=deqxdigisoundca
+DIGIDEV=hw:CARD=test
 #amixer -D$DIGIDEV set 'Port B source' 'loopback'
 
 sleep 2

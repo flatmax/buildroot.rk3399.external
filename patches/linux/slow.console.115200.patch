@@ -1,0 +1,13 @@
+Index: linux-nanopi4-linux-v4.4.y/arch/arm64/boot/dts/rockchip/rk3399-nanopi4-common.dtsi
+===================================================================
+--- linux-nanopi4-linux-v4.4.y.orig/arch/arm64/boot/dts/rockchip/rk3399-nanopi4-common.dtsi
++++ linux-nanopi4-linux-v4.4.y/arch/arm64/boot/dts/rockchip/rk3399-nanopi4-common.dtsi
+@@ -58,7 +58,7 @@
+ 		   "rockchip,rk3399";
+ 
+ 	chosen {
+-		bootargs = "earlycon=uart8250,mmio32,0xff1a0000 swiotlb=1 console=ttyFIQ0 rootwait coherent_pool=1m";
++		bootargs = "root=/dev/mmcblk0p2 earlyprintk console=ttyS2,115200n8 swiotlb=1 rootwait coherent_pool=1m";
+ 	};
+ 
+ 	cpuinfo {

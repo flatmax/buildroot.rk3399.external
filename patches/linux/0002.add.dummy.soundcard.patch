@@ -1,0 +1,64 @@
+Index: linux-nanopi4-linux-v4.4.y/arch/arm64/boot/dts/rockchip/rk3399-nanopi4-common.dtsi
+===================================================================
+--- linux-nanopi4-linux-v4.4.y.orig/arch/arm64/boot/dts/rockchip/rk3399-nanopi4-common.dtsi
++++ linux-nanopi4-linux-v4.4.y/arch/arm64/boot/dts/rockchip/rk3399-nanopi4-common.dtsi
+@@ -225,7 +225,7 @@
+ 	};
+ 
+ 	hdmi_sound: hdmi-sound {
+-		status = "okay";
++		status = "disabled";
+ 		compatible = "simple-audio-card";
+ 		simple-audio-card,format = "i2s";
+ 		simple-audio-card,mclk-fs = <256>;
+@@ -240,7 +240,7 @@
+ 	};
+ 
+ 	spdif-sound {
+-		status = "okay";
++		status = "disabled";
+ 		compatible = "simple-audio-card";
+ 		simple-audio-card,name = "ROCKCHIP,SPDIF";
+ 		simple-audio-card,cpu {
+@@ -257,6 +257,32 @@
+ 		#sound-dai-cells = <0>;
+ 	};
+ 
++	sound {
++		status = "okay";
++		compatible = "simple-audio-card";
++		simple-audio-card,name = "test";
++		simple-audio-card,format="i2s";
++
++		simple-audio-card,bitclock-master = <&cpu_dai>;
++		simple-audio-card,frame-master = <&cpu_dai>;
++		simple-audio-card,mclk-fs = <256>;
++
++		cpu_dai: simple-audio-card,cpu {
++			sound-dai = <&i2s0>;
++		};
++
++		codec_dai: simple-audio-card,codec {
++			sound-dai = <&i2s0_out>;
++		};
++
++	};
++
++	i2s0_out: i2s0-out {
++    #sound-dai-cells = <0>;
++    compatible = "flatmax,bare";
++    status = "okay";
++  };
++
+ 	pwm_bl: backlight {
+ 		status = "disabled";
+ 		compatible = "pwm-backlight";
+@@ -908,7 +934,7 @@
+ 	status = "okay";
+ 	rockchip,i2s-broken-burst-len;
+ 	rockchip,playback-channels = <8>;
+-	rockchip,capture-channels = <8>;
++	rockchip,capture-channels = <2>;
+ 	#sound-dai-cells = <0>;
+ };
+ 

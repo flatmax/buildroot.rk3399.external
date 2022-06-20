@@ -4,7 +4,7 @@ load mmc ${devnum} ${load_addr} vars.txt
 env import -t ${load_addr} ${filesize}
 
 echo setting bootargs then loading the fdt and kernel
-setenv bootargs "root=/dev/mmcblk1p2 earlyprintk console=ttyS2,115200n8 rw rootwait"
+setenv bootargs "root=/dev/mmcblk0p2 earlyprintk console=ttyS2,115200n8 swiotlb=1 coherent_pool=1m rw rootwait"
 fatload mmc ${devnum}:${distro_bootpart} ${fdt_addr_r} ${fdt_name}
 fatload mmc ${devnum}:${distro_bootpart} ${kernel_addr_r} ${kernel_name}
 
