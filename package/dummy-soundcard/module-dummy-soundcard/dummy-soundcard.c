@@ -72,22 +72,15 @@ static int deqx_digi_probe(struct platform_device *pdev)
 	dev_set_drvdata(&pdev->dev, deqx_digi_rk3399);
 	snd_soc_card_set_drvdata(card, deqx_digi_rk3399);
 
-	deqx_digi_dais[0].platform_of_node = of_parse_phandle(pdev->dev.of_node,
+	deqx_digi_dais[0].platforms->of_node = of_parse_phandle(pdev->dev.of_node,
 							"i2s-controller", 0);
 
-	if (deqx_digi_dais[0].platform_of_node) {
-		deqx_digi_dais[0].cpu_of_node = deqx_digi_dais[0].platform_of_node;
+	if (deqx_digi_dais[0].platforms->of_node) {
+		deqx_digi_dais[0].cpus->of_node = deqx_digi_dais[0].platforms->of_node;
 	} else {
 		dev_err(&pdev->dev, "Property 'i2s-controller' missing or invalid\n");
 		return -EINVAL;
 	}
-
-	// deqx_digi_dais[0].codecs->of_node = of_parse_phandle(pdev->dev.of_node,
-	// 		"deqx,digi-codec", 0);
-	// if (!deqx_digi_dais[0].codecs->of_node) {
-	// 	dev_err(&pdev->dev, "Property 'deqx,digi-codec' missing or invalid\n");
-	// 	goto err_freeup_nodes;
-	// }
 
 	deqx_digi_dais[0].codecs->dai_name	= "snd-soc-dummy-dai";
 	deqx_digi_dais[0].codecs->name		= "snd-soc-dummy";
@@ -108,8 +101,8 @@ static int deqx_digi_probe(struct platform_device *pdev)
 	return ret;
 
 	err_freeup_nodes:
-		if (deqx_digi_dais[0].platform_of_node){
-			of_node_put(deqx_digi_dais[0].platform_of_node); // free up the i2s_node
+		if (deqx_digi_dais[0].platforms->of_node){
+			of_node_put(deqx_digi_dais[0].platforms->of_node); // free up the i2s_node
 		}
 		if (deqx_digi_dais[0].codecs->of_node) {
 			of_node_put(deqx_digi_dais[0].codecs->of_node);
@@ -124,8 +117,8 @@ static int deqx_digi_remove(struct platform_device *pdev)
 
 	dev_info(&pdev->dev, "deqx_digi_remove enter\n");
 
-	if (deqx_digi_dais[0].platform_of_node){
-		of_node_put(deqx_digi_dais[0].platform_of_node); // free up the i2s_node
+	if (deqx_digi_dais[0].platforms->of_node){
+		of_node_put(deqx_digi_dais[0].platforms->of_node); // free up the i2s_node
 	}
 
 	snd_soc_unregister_card(card);

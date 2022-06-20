@@ -1,11 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
- * Driver for the bare codec
+ * Driver for the bare codec based on the pcm5102a driver
  *
  * Author:	Matt Flax <flatmax@>
  *		Copyright 2022
- * Author:	Florian Meier <florian.meier@koalo.de>
- *		Copyright 2013
  */
 
 #include <linux/init.h>
@@ -34,16 +32,16 @@ static struct snd_soc_dai_driver bare_dai = {
 	},
 };
 
-static struct snd_soc_codec_driver soc_component_dev_bare = {
-	// .idle_bias_off = false,
-	// .use_pmdown_time	= 1,
-	// .endianness		= 1,
-	// .non_legacy_dai_naming	= 1,
+static struct snd_soc_component_driver soc_component_dev_bare = {
+	.idle_bias_on		= 1,
+	.use_pmdown_time	= 1,
+	.endianness		= 1,
+	.non_legacy_dai_naming	= 1,
 };
 
 static int bare_probe(struct platform_device *pdev)
 {
-	return snd_soc_register_codec(&pdev->dev, &soc_component_dev_bare,
+	return devm_snd_soc_register_component(&pdev->dev, &soc_component_dev_bare,
 			&bare_dai, 1);
 }
 
@@ -65,5 +63,4 @@ module_platform_driver(bare_codec_driver);
 
 MODULE_DESCRIPTION("ASoC bare codec driver");
 MODULE_AUTHOR("Matt Flax <flatmax@>");
-MODULE_AUTHOR("Florian Meier <florian.meier@koalo.de>");
 MODULE_LICENSE("GPL v2");
